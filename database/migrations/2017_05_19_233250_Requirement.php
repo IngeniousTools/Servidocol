@@ -15,13 +15,13 @@ class Requirement extends Migration
     {
       Schema::create('Requirement', function (Blueprint $table) {
         $table->increments('idRequirement');
-        $table->integer('idPerson')->unsigned();
+        $table->integer('idEmployee')->unsigned();
         $table->date('date');
         $table->boolean('autorization');
         $table->date('deliveryDate');
         $table->tinyInteger('quantity');
 
-        $table->foreign('idPerson')->references('idPerson')->on('person');
+        $table->foreign('idEmployee')->references('idEmployee')->on('Employee');
       });
 
     }

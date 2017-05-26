@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Person extends Migration
+class Employee extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class Person extends Migration
      */
     public function up()
     {
-      Schema::create('Person', function (Blueprint $table) {
-        $table->increments('idPerson');
+      Schema::create('Employee', function (Blueprint $table) {
+        $table->integer('idEmployee')->unsigned();
         $table->smallInteger('idJobTitle')->unsigned();
         $table->string('name',40);
         $table->string('lastname',40);
@@ -24,6 +24,7 @@ class Person extends Migration
         $table->string('email',50);
         $table->boolean('status');
 
+        $table->primary('idEmployee');
         $table->foreign('idJobTitle')->references('idJobTitle')->on('JobTitle');
       });
     }
@@ -35,6 +36,6 @@ class Person extends Migration
      */
     public function down()
     {
-      Schema::dropIfExists('Person');
+      Schema::dropIfExists('Employee');
     }
 }

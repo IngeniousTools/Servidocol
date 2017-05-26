@@ -1,0 +1,71 @@
+body{
+  padding-bottom: 70px;
+  font-family: 'Ubuntu', sans-serif;
+}
+
+/* Nav bar */
+
+.navbar{
+  background-color: #4B85E8;
+}
+
+.navbar-default .btn-navbar-custom{
+  color: #FFF;
+  background-color: #4B85E8;
+  border: transparent;
+  border-color: #FFF;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+  border-radius: 4px;
+  font-size: 15px;
+}
+
+/* Carousel */
+.carousel{
+  padding-top: 70px;
+  height: 500px;
+}
+
+.carousel-inner > .item > img, .carousel-inner > .item > a > img{
+  width: 450px;
+}
+
+/* Form */
+
+.form-login-position{
+  padding-top: 200px;
+  padding-left: 100px;
+  padding-right: 100px;
+}
+
+.form-position{
+  padding: 100px;
+}
+
+.form-content {
+  background: #FFF;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+  border-radius: 4px;
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  padding: 40px;
+}
+
+.btn-custom{
+  color: #FFF;
+  background-color: #4B85E8;
+  border: transparent;
+  border-color: #FFF;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+  border-radius: 4px;
+  font-size: 15px;
+}

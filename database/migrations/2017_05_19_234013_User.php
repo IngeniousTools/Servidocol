@@ -15,12 +15,12 @@ class User extends Migration
     {
       Schema::create('User', function (Blueprint $table) {
         $table->increments('idUser');
-        $table->integer('idPerson')->unsigned();
+        $table->integer('idEmployee')->unsigned();
         $table->smallInteger('idRol')->unsigned();
         $table->string('password',200);
         $table->boolean('status');
 
-        $table->foreign('idPerson')->references('idPerson')->on('person');
+        $table->foreign('idEmployee')->references('idEmployee')->on('Employee');
         $table->foreign('idRol')->references('idRol')->on('rol');
       });
     }

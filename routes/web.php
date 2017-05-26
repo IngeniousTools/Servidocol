@@ -12,5 +12,26 @@
 */
 
 Route::get('/', function () {
-    return view('Index');
+  $data = array('title' => 'Servidocol' );
+  return view('Index', $data);
+});
+
+Route::get('login', function () {
+  $data = array('title' => 'Login Servidocol', );
+  return view('Login',$data);
+});
+
+Route::post('login','EmployeeController@login');
+
+Route::group(['prefix' => 'employee'], function (){
+
+  Route::get('create',function () {
+    $jobtitle = DB::table('jobtitle')->where('status',1)->get();
+    $data = array('jobtitle' => $jobtitle,
+                  'title' => 'Crear empleado');
+    return view('employee.RegistryEmployee', $data);
+  });
+
+  Route::post('create','EmployeeController@Registry');
+
 });
