@@ -23,15 +23,42 @@ Route::get('login', function () {
 
 Route::post('login','EmployeeController@login');
 
+Route::get('logout','EmployeeController@Logout');
+
 Route::group(['prefix' => 'employee'], function (){
 
   Route::get('create',function () {
     $jobtitle = DB::table('jobtitle')->where('status',1)->get();
     $data = array('jobtitle' => $jobtitle,
-                  'title' => 'Crear empleado');
+                  'title' => 'Crear empleado',);
     return view('employee.RegistryEmployee', $data);
   });
 
-  Route::post('create','EmployeeController@Registry');
+  Route::post('create','EmployeeController@RegistryEmployee');
+
+  Route::get('list','EmployeeController@ListEmployee');
+
+  Route::get('view/{identification}','EmployeeController@ViewEmployee');
+
+  Route::post('update/{identification}','EmployeeController@UpdateEmployee');
+
+});
+
+Route::group(['prefix' => 'user'], function (){
+
+  Route::get('create',function () {
+    $rol = DB::table('rol')->where('status',1)->get();
+    $data = array('rol' => $rol,
+                  'title' => 'Crear usuario',);
+    return view('user.RegistryUser', $data);
+  });
+
+  Route::post('create','EmployeeController@RegistryUser');
+
+  Route::get('list','EmployeeController@ListUser');
+
+  Route::get('view/{identification}','EmployeeController@ViewUser');
+
+  Route::post('update/{identification}','EmployeeController@UpdateUser');
 
 });

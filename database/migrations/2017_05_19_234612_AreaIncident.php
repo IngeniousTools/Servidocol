@@ -19,6 +19,8 @@ class AreaIncident extends Migration
         $table->boolean('status');
 
         $table->primary('idAreaIncident');
+
+        $table->unique('name');
       });
     }
 

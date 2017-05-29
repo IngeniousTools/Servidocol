@@ -17,7 +17,14 @@
         <div class="form-content">
 
           <form role="form" method="post" action="{{action('EmployeeController@login')}}">
+            @if (session('status'))
+              <div class="alert alert-danger text-center">
+                  {{ session('status') }}
+              </div>
+            @endif
+
             {{ csrf_field() }}
+
             <h2 class="text-center">Iniciar Sesión</h2>
             <div class="form-group {{ $errors->has('txt_identificacion') ? ' has-error' : '' }}">
                   <label class="sr-only" for="txt_identificacion">Identificación.</label>

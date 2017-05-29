@@ -13,4 +13,8 @@ class Employee extends Model
   public function jobtitle(){
     return $this->belongsTo('App\JobTitle','idJobTitle');
   }
+
+  public function user(){
+    return $this->belongsTo('App\User','idEmployee');
+  }
 }

@@ -19,6 +19,8 @@ class Breed extends Migration
         $table->boolean('status');
 
         $table->primary('idBreed');
+
+        $table->unique('name');
       });
     }
 

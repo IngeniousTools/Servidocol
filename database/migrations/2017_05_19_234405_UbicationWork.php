@@ -15,10 +15,12 @@ class UbicationWork extends Migration
     {
       Schema::create('UbicationWork', function (Blueprint $table) {
         $table->increments('idUbicationWork');
-        $table->string('name',30);
+        $table->string('name',40);
         $table->string('location',30);
         $table->integer('phone')->nullable();
         $table->boolean('status');
+
+        $table->unique('name');
       });
     }
 

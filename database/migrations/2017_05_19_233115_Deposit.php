@@ -18,7 +18,7 @@ class Deposit extends Migration
         $table->string('name',20);
         $table->boolean('status');
 
-
+        $table->unique('name');
       });
     }
 

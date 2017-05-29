@@ -17,6 +17,8 @@ class Category extends Migration
           $table->increments('idCategory');
           $table->string('name',20);
           $table->boolean('Status');
+
+          $table->unique('name');
       });
     }
 

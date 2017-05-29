@@ -19,8 +19,8 @@ class Employee extends Migration
         $table->string('name',40);
         $table->string('lastname',40);
         $table->string('location',35);
-        $table->integer('celPhone')->nullable();
-        $table->integer('phone')->nullable();
+        $table->bigInteger('celPhone')->nullable();
+        $table->bigInteger('phone')->nullable();
         $table->string('email',50);
         $table->boolean('status');
 

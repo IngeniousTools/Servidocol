@@ -22,6 +22,8 @@ class User extends Migration
 
         $table->foreign('idEmployee')->references('idEmployee')->on('Employee');
         $table->foreign('idRol')->references('idRol')->on('rol');
+
+        $table->unique('idEmployee');
       });
     }
 

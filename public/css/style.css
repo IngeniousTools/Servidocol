@@ -9,6 +9,21 @@ body{
   background-color: #4B85E8;
 }
 
+.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus{
+  background-color: transparent;
+}
+
+.navbar-nav > li > .dropdown-menu{
+  background-color: #4B85E8;
+  border: transparent;
+}
+
+.dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus{
+  color: #FFF;
+  background-color: #4B85E8;
+  border: transparent;
+}
+
 .navbar-default .btn-navbar-custom{
   color: #FFF;
   background-color: #4B85E8;
@@ -22,6 +37,10 @@ body{
   font-size: 15px;
 }
 
+.logo{
+  width: 70px;
+}
+
 /* Carousel */
 .carousel{
   padding-top: 70px;
@@ -29,7 +48,8 @@ body{
 }
 
 .carousel-inner > .item > img, .carousel-inner > .item > a > img{
-  width: 450px;
+  height: 430px;
+  width: 100%;
 }
 
 /* Form */

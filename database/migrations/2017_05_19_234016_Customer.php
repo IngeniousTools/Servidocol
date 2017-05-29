@@ -17,12 +17,14 @@ class Customer extends Migration
         $table->increments('idCustomer');
         $table->tinyInteger('idTypeCustomer')->unsigned();
         $table->integer('idUser')->unsigned();
-        $table->string('name',25);
+        $table->string('name',50);
         $table->string('location',30);
         $table->string('observation',200);
 
         $table->foreign('idTypeCustomer')->references('idTypeCustomer')->on('TypeCustomer');
         $table->foreign('idUser')->references('idUser')->on('User');
+
+        $table->unique('name');
       });
     }
 

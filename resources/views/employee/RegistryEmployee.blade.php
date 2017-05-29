@@ -18,6 +18,7 @@
       <div class="form-content">
         <form role="form" action="" method="post">
           {{ csrf_field() }}
+
           <h2 class="text-center">Registro de empleados</h2>
           <div class="form-group {{ $errors->has('txt_identificacion') ? ' has-error' : '' }}">
               <label class="sr-only" for="txt_identificacion">Identificación.</label>
@@ -99,7 +100,7 @@
               @endif
           </div>
 
-          <button class="btn btn-block btn-custom" type="submit" name="btn_login">Iniciar sesión.</button>
+          <button class="btn btn-block btn-custom" type="submit" name="btn_save">Registrar</button>
 
         </form>
       </div>

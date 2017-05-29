@@ -20,6 +20,8 @@ class WorkStation extends Migration
         $table->boolean('status');
 
         $table->foreign('idUbicationWork')->references('idUbicationWork')->on('UbicationWork');
+
+        $table->unique('name');
       });
     }
 

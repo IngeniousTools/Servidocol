@@ -17,6 +17,8 @@ class JobTitle extends Migration
         $table->smallIncrements('idJobTitle');
         $table->string('name',45);
         $table->boolean('status');
+
+        $table->unique('name');
       });
 
     }

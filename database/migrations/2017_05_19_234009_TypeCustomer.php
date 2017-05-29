@@ -19,6 +19,8 @@ class TypeCustomer extends Migration
         $table->boolean('status');
 
         $table->Primary('idTypeCustomer');
+
+        $table->unique('name');
       });
 
     }

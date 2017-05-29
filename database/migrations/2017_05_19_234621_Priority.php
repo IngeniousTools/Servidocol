@@ -19,6 +19,8 @@ class Priority extends Migration
         $table->boolean('status');
 
         $table->primary('idPriority');
+
+        $table->unique('name');
       });
     }
 

@@ -22,6 +22,8 @@ class Item extends Migration
 
         $table->foreign('idCategory')->references('idCategory')->on('Category');
         $table->foreign('idDeposit')->references('idDeposit')->on('Deposit');
+
+        $table->unique('name');
     });
 
     }

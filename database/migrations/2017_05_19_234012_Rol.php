@@ -15,7 +15,7 @@ class Rol extends Migration
     {
       Schema::create('Rol', function (Blueprint $table) {
         $table->smallIncrements('idRol');
-        $table->string('name',20);
+        $table->string('name',30);
         $table->boolean('status');
       });
     }

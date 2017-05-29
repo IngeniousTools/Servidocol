@@ -17,6 +17,8 @@ class Brand extends Migration
         $table->increments('idBrand');
         $table->string('name',20);
         $table->boolean('status');
+
+        $table->unique('name');
       });
 
     }
