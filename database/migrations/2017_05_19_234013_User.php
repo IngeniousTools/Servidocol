@@ -17,7 +17,7 @@ class User extends Migration
         $table->increments('idUser');
         $table->integer('idEmployee')->unsigned();
         $table->smallInteger('idRol')->unsigned();
-        $table->string('password',200);
+        $table->text('password');
         $table->boolean('status');
 
         $table->foreign('idEmployee')->references('idEmployee')->on('Employee');

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Employee;
 use App\JobTitle;
 use App\User;
@@ -55,7 +56,7 @@ class EmployeeController extends Controller{
       return view('employee/ViewEmployee',$info);
     }
 
-    public function UpdateEmployee(Request $request, $identification){
+    protected function UpdateEmployee(Request $request, $identification){
       $employee = Employee::find($identification);
       $employee->name = $request->input('txt_name');
       $employee->idJobTitle=$request->input('opt_jobtitle');
@@ -69,7 +70,7 @@ class EmployeeController extends Controller{
       return $this->ListEmployee();
     }
 
-    public function RegistryUser(Request $request){
+    protected function RegistryUser(Request $request){
       $user = new User;
       $user->idUser = null;
       $user->idEmployee = $request->input('txt_identificacion');
@@ -97,7 +98,7 @@ class EmployeeController extends Controller{
       return view('user/ViewUser',$info);
     }
 
-    public function UpdateUser(Request $request, $identification){
+    protected function UpdateUser(Request $request, $identification){
       $user = User::find($identification);
       $user->idRol = $request->input('opt_rol');
       $user->status = $request->input('opt_status');
@@ -107,28 +108,33 @@ class EmployeeController extends Controller{
     }
 
     protected function Login(Request $request){
-      $user = User::find($request->input('txt_identificacion'));
-      if(!empty($user)){
-        if ($user->status === 0) {
+      $user = DB::table('user')
+                     ->where('idEmployee', '=', $request->input('txt_identificacion'))
+                     ->get();
+      if($user<>"[]"){
+        foreach ($user as $users) {
+        if ($users->status === 0) {
           return back()->with('status','Usuario inactivo');
         }else {
-          if($request->input('txt_password') === decrypt($user->password)){
-            session(['identification' => $user->idEmployee]);
-            session(['rol' => $user->idRol]);
-            session(['name' => $user->employee->name . " " . $user->employee->lastname]);
+          if($request->input('txt_password') === decrypt($users->password)){
+            session(['identification' => $users->idEmployee]);
+            session(['rol' => $users->idRol]);
+            $names= Employee::find($request->input('txt_identificacion'));
+            session(['name' => $names->name . " " . $names->lastname]);
             return redirect('/');
           }else{
             return back()->with('status','Contraseña incorrecta');
           }
         }
+        }
       }else{
-        return back()->with('status','Usuario no existente');
+        return back()->with('status','Usuario no existe');
       }
       return redirect('/');
 
     }
 
-    public function Logout(Request $request){
+    protected function Logout(Request $request){
       $request->session()->flush();
       return redirect('/');
     }
