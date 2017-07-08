@@ -62,3 +62,58 @@ Route::group(['prefix' => 'user'], function (){
   Route::post('update/{identification}','EmployeeController@UpdateUser');
 
 });
+
+Route::group(['prefix' => 'incident'], function (){
+
+  Route::get('create',function () {
+    $areaIncident = DB::table('areaincident')->where('status',1)->get();
+    $priority = DB::table('priority')->where('status',1)->get();
+    $data = array('areaIncident' => $areaIncident,
+                  'priority' => $priority,
+                  'title' => 'Crear incidente',);
+    return view('incident.RegistryIncident', $data);
+  });
+
+  Route::post('create','IncidentController@CreateIncident');
+
+  Route::get('list','IncidentController@ListIncident');
+
+  Route::get('view/{identification}','IncidentController@ViewIncident');
+
+  Route::post('view/{identification}','IncidentController@CommentIncident');
+
+  Route::get('property/{identification}','IncidentController@PropertyIncident');
+
+  Route::get('close/{identification}','IncidentController@ChangeStatusIncident');
+
+  Route::get('search', function(){
+    $data = array('title' => 'Busqueda de incidentes');
+    return view('incident.SearchIncident', $data);
+  });
+
+  Route::post('search','IncidentController@SearchIncident');
+
+  Route::get('filter/{identification}', function($identification){
+
+    $incident = DB::table('incident')->where([['idIncident',$identification],['status',1],['aprobation',0]])->get();
+    $incidentPriority = DB::table('incident')->where([['idIncident',$identification],['status',1],['aprobation',0]])->value('idPriority');
+
+    $priority = DB::table('priority')->where([['idPriority',$incidentPriority],['status',1]])->get();
+
+    $priorization = DB::table('priority')->where('status',1)->get();
+
+    $areaIncident = DB::table('areaincident')->where('status',1)->get();
+    $incidentDetail = Storage::get('incident'.$identification.'.json');
+    $detail = json_decode($incidentDetail, true);
+    $data = array('title' => "Filtro de incidencias",
+                  'incidents' => $incident,
+                  'prioritys' => $priority,
+                  'priorizations' => $priorization,
+                  'areaincidents' => $areaIncident,
+                  'detail' => $detail);
+    return view('incident.FilterIncident',$data);
+  });
+
+  Route::post('filter/{identification}','IncidentController@FilterIncident');
+
+});

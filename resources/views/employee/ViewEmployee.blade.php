@@ -98,10 +98,6 @@
               </div>
             </div>
 
-            <div class="separator">
-
-            </div>
-
             <div class="form-group {{ $errors->has('txt_location') ? ' has-error' : '' }}">
               <div class="col-xs-3">
                 <label for="txt_location">Dirección: </label>

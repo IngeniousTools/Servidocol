@@ -26,6 +26,24 @@
 
               <ul class="nav navbar-nav">
                 <li>
+                  <a href="#" data-toggle="dropdown"> <button class="btn btn-navbar-custom" type="button">Incidentes  <i class="fa fa-sort-desc" aria-hidden="true"></i></button></a>
+                  <ul class="dropdown-menu">
+                    <li>
+                      <a href="{{url('incident/list')}}">
+                        <button type="submit" class="btn btn-navbar-custom">Ver incidencias</button>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="{{url('incident/search')}}">
+                        <button type="submit" class="btn btn-navbar-custom">Buscar incidencias</button>
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+
+              <ul class="nav navbar-nav">
+                <li>
                   <a href="#" data-toggle="dropdown"> <button class="btn btn-navbar-custom" type="button">Empleados  <i class="fa fa-sort-desc" aria-hidden="true"></i></button></a>
                   <ul class="dropdown-menu">
                     <li>
@@ -76,6 +94,24 @@
 
               <ul class="nav navbar-nav">
                 <li>
+                  <a href="#" data-toggle="dropdown"> <button class="btn btn-navbar-custom" type="button">Incidentes  <i class="fa fa-sort-desc" aria-hidden="true"></i></button></a>
+                  <ul class="dropdown-menu">
+                    <li>
+                      <a href="{{url('incident/list')}}">
+                        <button type="submit" class="btn btn-navbar-custom">Ver incidencias</button>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="{{url('incident/search')}}">
+                        <button type="submit" class="btn btn-navbar-custom">Buscar incidencias</button>
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+
+              <ul class="nav navbar-nav">
+                <li>
                   <a href="#" data-toggle="dropdown"> <button class="btn btn-navbar-custom" type="button">{{session('name')}}  <i class="fa fa-sort-desc" aria-hidden="true"></i></button></a>
                   <ul class="dropdown-menu">
                     <li>
@@ -88,6 +124,24 @@
               </ul>
 
               @elseif(session('rol') === 3)
+
+              <ul class="nav navbar-nav">
+                <li>
+                  <a href="#" data-toggle="dropdown"> <button class="btn btn-navbar-custom" type="button">Incidentes  <i class="fa fa-sort-desc" aria-hidden="true"></i></button></a>
+                  <ul class="dropdown-menu">
+                    <li>
+                      <a href="{{url('incident/list')}}">
+                        <button type="submit" class="btn btn-navbar-custom">Ver incidencias</button>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="{{url('incident/search')}}">
+                        <button type="submit" class="btn btn-navbar-custom">Buscar incidencias</button>
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
 
               <ul class="nav navbar-nav">
                 <li>
@@ -166,6 +220,29 @@
 
               <ul class="nav navbar-nav">
                 <li>
+                  <a href="#" data-toggle="dropdown"> <button class="btn btn-navbar-custom" type="button">Incidentes  <i class="fa fa-sort-desc" aria-hidden="true"></i></button></a>
+                  <ul class="dropdown-menu">
+                    <li>
+                      <a href="{{url('incident/create')}}">
+                        <button type="submit" class="btn btn-navbar-custom">Crear incidencias</button>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="{{url('incident/list')}}">
+                        <button type="submit" class="btn btn-navbar-custom">Ver incidencias</button>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="{{url('incident/search')}}">
+                        <button type="submit" class="btn btn-navbar-custom">Buscar incidencias</button>
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+
+              <ul class="nav navbar-nav">
+                <li>
                   <a href="#" data-toggle="dropdown"> <button class="btn btn-navbar-custom" type="button">{{session('name')}}  <i class="fa fa-sort-desc" aria-hidden="true"></i></button></a>
                   <ul class="dropdown-menu">
                     <li>
@@ -178,7 +255,7 @@
               </ul>
 
               @elseif(empty(session('rol')))
-                <a href="#" class="navbar-link">
+                <a href="{{url('incident/create')}}" class="navbar-link">
                   <button type="submit" class="btn btn-navbar-custom">Registrar indencia</button>
                 </a>
                 @if($title != "Login Servidocol")
