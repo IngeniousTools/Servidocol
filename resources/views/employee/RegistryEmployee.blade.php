@@ -4,8 +4,9 @@
 <style media="screen">
   body{
     background-image:url(../images/bg-screen2.jpg);
+    background-attachment: fixed;
     background-repeat: no-repeat;
-    background-size: 100%;
+    background-size: cover;
   }
 </style>
 @endsection

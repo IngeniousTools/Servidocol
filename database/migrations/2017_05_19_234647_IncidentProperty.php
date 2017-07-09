@@ -16,7 +16,7 @@ class IncidentProperty extends Migration
       Schema::create('IncidentProperty', function (Blueprint $table) {
         $table->integer('idUser')->unsigned();
         $table->integer('idIncident')->unsigned();
-        $table->string('comment',45);
+        $table->date('date');
 
         $table->foreign('idUser')->references('idUser')->on('User');
         $table->foreign('idIncident')->references('idIncident')->on('Incident');

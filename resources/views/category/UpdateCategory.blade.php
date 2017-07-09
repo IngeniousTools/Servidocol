@@ -1,9 +1,9 @@
-@extends('layouts.Navbar')
+@extends('layouts.navbar')
 
 @section('styles')
 <style media="screen">
   body{
-    background-image:url(../../images/bg-screen3.jpg);
+    background-image:url(../../../images/bg-screen11.jpg);
     background-attachment: fixed;
     background-repeat: no-repeat;
     background-size: cover;
@@ -39,52 +39,38 @@
 <div class="container">
   <div class="row">
     <div class="form-position col-xs-12 col-md-6 col-md-offset-3">
+
       <div class="form-content">
-        <div class="form-content text-center">
-          <form role="form" action="{{action('EmployeeController@UpdateUser',[$user->idUser])}}" method="post">
-            {{ csrf_field() }}
+        @foreach($categories as $category)
+        <form role="form" action="{{action('CategoryController@UpdateCategory',[$category->idCategory])}}" method="post">
+          {{ csrf_field() }}
 
-            <h3 class="text-center">Información de {{$user->employee->name}} {{$user->employee->lastname}}</h3>
+          <h2 class="text-center">Actualización de categoria</h2>
+          <br>
+          <br>
+          <br>
 
-            </br>
-            </br>
-            </br>
 
-            <div class="form-group">
-              <div class="col-xs-3">
-                <label for="txt_identificacion">Identificación:</label>
-              </div>
-              <div class="col-xs-8 col-xs-offset-1">
-                <label id="txt_identificacion" name="txt_identificacion">{{$user->idEmployee}}</label>
-              </div>
+          <div class="form-group {{ $errors->has('txt_name') ? ' has-error' : '' }}">
+            <div class="col-xs-3">
+              <label for="txt_name">Nombre: </label>
             </div>
-          </br>
-        </br>
-
-
-            <div class="form-group">
-              <div class="col-xs-2">
-                <label class="text-center" for="opt_rol">Rol: </label>
-              </div>
-              <div class="col-xs-9 col-xs-offset-1">
-                <select class="form-control" id="opt_rol" name="opt_rol" disabled="" required>
-                  @foreach ($rol as $rols)
-                  <option	value="{{$rols->idRol}}"
-                  @if($rols->idRols === $rols->idRol)
-                    selected=""
-                  @endif
-                    > {{ $rols->name }} </option>
-                  @endforeach
-                </select>
-              </div>
+            <div class="col-xs-8 col-xs-offset-1">
+              <input class="form-control" id="txt_name" name="txt_name" type="text" placeholder="Nombre" value="{{$category->name}}" disabled="" required>
+              @if ($errors->has('txt_name'))
+              <span class="help-block">
+                <strong>{{ $errors->first('txt_name') }}</strong>
+              </span>
+              @endif
             </div>
+          </div>
 
-            </br>
-            </br>
+          <br>
+          <br>
 
             <div class="form-group">
               <select class="form-control" id="opt_status" name="opt_status" disabled="" >
-                @if($user->status === 0)
+                @if($category->Status == 0)
                   <option	value="0" selected=""> Inactivo </option>
                   <option	value="1"> Activo </option>
                 @else
@@ -94,20 +80,16 @@
               </select>
             </div>
 
-            </br>
-
             <div class="col-xs-6">
-              <a href="{{url('user/list')}}">
+              <a href="{{url('element/category/list')}}">
                 <button class="btn btn-default" type="button" name="button">Cancelar</button>
               </a>
             </div>
             <div class="col-xs-6">
               <button class="btn btn-custom" type="button" name="button" id="updated" onclick="update();">Actualizar</button>
               <span id="covert">
+          @endforeach
 
-              </span>
-            </div>
-          </div>
         </form>
       </div>
     </div>

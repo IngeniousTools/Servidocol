@@ -117,3 +117,47 @@ Route::group(['prefix' => 'incident'], function (){
   Route::post('filter/{identification}','IncidentController@FilterIncident');
 
 });
+
+Route::group(['prefix' => 'element'], function (){
+
+  Route::group(['prefix' => 'category'], function (){
+
+    Route::get('create', function (){
+      $data = array('title' => 'Crear categoria');
+      return view('category.RegistryCategory',$data);
+    });
+
+    Route::post('create','CategoryController@CreateCategory');
+
+    Route::get('list','CategoryController@ListCategory');
+
+    Route::get('update/{identification}',function($identification){
+      $categories = DB::table('category')->where('idCategory',$identification)->get();
+      $data = array('title' => 'Actualizar categorias',
+                    'categories' => $categories,
+                    );
+      return view('category.UpdateCategory', $data);
+    });
+
+    Route::post('update/{identification}','CategoryController@UpdateCategory');
+
+  });
+
+  Route::get('create',function (){
+    $categories = DB::table('category')->where('Status',1)->get();
+    $deposits = DB::table('deposit')->where('status',1)->get();
+    $data = array('title' => 'Registro de elementos',
+                  'categories' => $categories,
+                  'deposits' => $deposits);
+    return view('element.RegistryElement',$data);
+  });
+
+  Route::post('create','ElementController@CreateElement');
+
+  Route::get('list','ElementController@ListElement');
+
+  Route::get('view/{identification}', 'ElementController@ViewElement');
+
+  Route::post('update/{identification}','ElementController@UpdateElement');
+
+});

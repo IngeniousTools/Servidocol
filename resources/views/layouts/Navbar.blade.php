@@ -26,6 +26,34 @@
 
               <ul class="nav navbar-nav">
                 <li>
+                  <a href="#" data-toggle="dropdown"> <button class="btn btn-navbar-custom" type="button">Elementos  <i class="fa fa-sort-desc" aria-hidden="true"></i></button></a>
+                  <ul class="dropdown-menu">
+                    <li>
+                      <a href="{{url('element/category/create')}}">
+                        <button type="submit" class="btn btn-navbar-custom">Crear categorias</button>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="{{url('element/category/list')}}">
+                        <button type="submit" class="btn btn-navbar-custom">Ver categorias</button>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="{{url('element/create')}}">
+                        <button type="submit" class="btn btn-navbar-custom">Crear elementos</button>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="{{url('element/list')}}">
+                        <button type="submit" class="btn btn-navbar-custom">Ver elementos</button>
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+
+              <ul class="nav navbar-nav">
+                <li>
                   <a href="#" data-toggle="dropdown"> <button class="btn btn-navbar-custom" type="button">Incidentes  <i class="fa fa-sort-desc" aria-hidden="true"></i></button></a>
                   <ul class="dropdown-menu">
                     <li>
