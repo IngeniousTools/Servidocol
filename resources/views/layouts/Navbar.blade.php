@@ -39,6 +39,16 @@
                       </a>
                     </li>
                     <li>
+                      <a href="{{url('element/brand/create')}}">
+                        <button type="submit" class="btn btn-navbar-custom">Crear categorias</button>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="{{url('element/brand/list')}}">
+                        <button type="submit" class="btn btn-navbar-custom">Ver categorias</button>
+                      </a>
+                    </li>
+                    <li>
                       <a href="{{url('element/create')}}">
                         <button type="submit" class="btn btn-navbar-custom">Crear elementos</button>
                       </a>

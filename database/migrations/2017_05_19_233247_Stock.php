@@ -17,6 +17,7 @@ class Stock extends Migration
         $table->increments('idStock');
         $table->integer('idBill')->unsigned();
         $table->integer('consecutive');
+        $table->string('observation',150);
         $table->boolean('status');
 
         $table->foreign('idBill')->references('idBill')->on('Bill');

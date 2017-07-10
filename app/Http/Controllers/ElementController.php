@@ -9,6 +9,13 @@ use App\Deposit;
 
 class ElementController extends Controller{
 
+  protected $idElement;
+  public $name;
+  protected $deposit;
+  protected $category;
+  protected $dateRedistribution;
+  protected $status;
+
   protected function CreateElement(Request $request){
     $element = new Element;
     $element->idItem = null;
@@ -54,4 +61,17 @@ class ElementController extends Controller{
   protected function NotifyElement(){
 
   }
+
+  protected function CreateElementStock(){
+
+  }
+
+  protected function ListElementStock(){
+
+  }
+
+  protected function UpdateElementStock(){
+    
+  }
+
 }

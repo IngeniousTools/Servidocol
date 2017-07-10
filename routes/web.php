@@ -143,6 +143,52 @@ Route::group(['prefix' => 'element'], function (){
 
   });
 
+  Route::group(['prefix' => 'brand'], function (){
+
+    Route::get('create', function (){
+      $data = array('title' => 'Crear marca de elemento');
+      return view('brand.RegistryBrand',$data);
+    });
+
+    Route::post('create','BrandController@CreateBrand');
+
+    Route::get('list','BrandController@ListBrand');
+
+    Route::get('update/{identification}',function ($identification){
+      $brands = DB::table('brand')->where('idBrand',$identification)->get();
+      $data = array('title' => 'Actualizar marca de elemento',
+                    'brands' => $brands,
+                    );
+      return view('brand.UpdateBrand', $data);
+    });
+
+    Route::post('update/{identification}','BrandController@UpdateBrand');
+
+  });
+
+  Route::group(['prefix' => 'stock'], function (){
+
+    Route::get('create', function (){
+      $data = array('title' => 'Crear marca de elemento');
+      return view('brand.RegistryBrand',$data);
+    });
+
+    Route::post('create','ElementController@CreateElementStock');
+
+    Route::get('list','ElementController@ListElementStock');
+
+    Route::get('update/{identification}',function ($identification){
+      $brands = DB::table('brand')->where('idBrand',$identification)->get();
+      $data = array('title' => 'Actualizar marca de elemento',
+                    'brands' => $brands,
+                    );
+      return view('brand.UpdateBrand', $data);
+    });
+
+    Route::post('update/{identification}','ElementController@UpdateElementStock');
+
+  });
+
   Route::get('create',function (){
     $categories = DB::table('category')->where('Status',1)->get();
     $deposits = DB::table('deposit')->where('status',1)->get();
