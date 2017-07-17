@@ -39,7 +39,7 @@
     <div class="form-position col-xs-12 col-md-8 col-md-offset-2">
 
       <div class="form-content">
-        <form role="form" action="" method="post">
+        <form role="form" action="" method="post" id="form">
           {{ csrf_field() }}
 
           <h2 class="text-center">Registro de Incidencias</h2>
@@ -55,7 +55,7 @@
           </div>
 
           <div class="form-group {{ $errors->has('txt_name') ? ' has-error' : '' }}">
-            <label class="sr-only" for="txt_lastname">Nombre: </label>
+            <label class="sr-only" for="txt_name">Nombre: </label>
             <input class="form-control" id="txt_name" name="txt_name" type="text" placeholder="Nombre" required>
             @if ($errors->has('txt_name'))
                 <span class="help-block">
@@ -66,7 +66,7 @@
 
           <div class="form-group {{ $errors->has('txt_celphone') ? ' has-error' : '' }}">
               <label class="sr-only" for="txt_celphone">Celular: </label>
-              <input class="form-control" id="txt_celphone" name="txt_celphone" type="text" placeholder="Celular">
+              <input class="form-control" id="txt_celphone" name="txt_celphone" type="text" placeholder="Celular" maxlength="10">
               @if ($errors->has('txt_celphone'))
                   <span class="help-block">
                       <strong>{{ $errors->first('txt_celphone') }}</strong>
@@ -76,7 +76,7 @@
 
           <div class="form-group {{ $errors->has('txt_phone') ? ' has-error' : '' }}">
             <label class="sr-only" for="txt_phone">Teléfono: </label>
-            <input class="form-control" id="txt_phone" name="txt_phone" type="text" placeholder="Teléfono">
+            <input class="form-control" id="txt_phone" name="txt_phone" type="text" placeholder="Teléfono" maxlength="10">
             @if ($errors->has('txt_phone'))
             <span class="help-block">
               <strong>{{ $errors->first('txt_phone') }}</strong>
@@ -86,7 +86,7 @@
 
           <div class="form-group {{ $errors->has('txt_email') ? ' has-error' : '' }}">
               <label class="sr-only" for="txt_email">Correo electrónico: </label>
-              <input class="form-control" id="txt_email" name="txt_email" type="text" placeholder="Correo electrónico" required>
+              <input class="form-control" id="txt_email" name="txt_email" type="text" placeholder="Correo electrónico" maxlength="40" required>
               @if ($errors->has('txt_email'))
                   <span class="help-block">
                       <strong>{{ $errors->first('txt_email') }}</strong>
@@ -121,4 +121,70 @@
     </div>
   </div>
 </div>
+
+<script>
+
+$(document).ready(function() {
+jQuery.extend(jQuery.validator.messages, {
+  required: "Este campo es obligatorio.",
+  email: "Por favor, escribe una dirección de correo válida",
+  digits: "Por favor, escribe sólo dígitos.",
+  });
+});
+
+jQuery.validator.addMethod("lettersonly", function(value, element){
+return this.optional(element) || /^[a-z ]+$/i.test(value);
+}, "Letras solamente por favor.");
+
+$.validator.addMethod("valueNotEquals", function(value, element, arg){
+ return arg !== value;
+}, "Selecciona otra opción.");
+
+$( "#form" ).validate( {
+  rules: {
+    opt_areaIncident: {
+      valueNotEquals: "0",
+    },
+    txt_name: {
+      lettersonly: true,
+      required: true,
+    },
+    txt_celphone: {
+      digits: true,
+      required: false,
+    },
+    txt_phone: {
+      digits: true,
+      required: false,
+    },
+    txt_email: {
+      email: true,
+      required: true,
+    },
+    txt_subject: {
+      required: true,
+    },
+    txt_observation: {
+      required: true,
+    }
+
+  }
+});
+</script>
+
+@if(session('delivery'))
+  <script type="text/javascript">
+      swal({
+        title: 'Registro Exitoso',
+        type: 'success',
+        html:
+          'Tu incidente fue registrado ' +
+          'exitosamente y entrará en ' +
+          'estudio lo más rapido posible.',
+        showCloseButton: true,
+        confirmButtonText: '<i class="fa fa-times"></i> Cerrar',
+      }).catch(swal.noop)
+
+  </script>
+@endif
 @endsection

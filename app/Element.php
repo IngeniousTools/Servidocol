@@ -17,4 +17,8 @@ class Element extends Model
   public function deposit(){
     return $this->belongsTo('App\Deposit','idDeposit');
   }
+
+  public function bill(){
+    return $this->belongsTo('App\Bill','idBill');
+  }
 }

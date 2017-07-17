@@ -18,7 +18,7 @@ class BrandController extends Controller{
       $brand->status = 1;
       $brand->save();
 
-      return redirect('element/brand/list');
+      return back()->with('delivery','delivery');
     }
 
     public function ListBrand(){

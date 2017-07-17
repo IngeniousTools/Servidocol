@@ -211,14 +211,9 @@
                     <h4 class="modal-title" id="myModalLabel">Agregar comentarios a el caso "{{$detail["subject"]}}"</h4>
                   </div>
                   <div class="modal-body">
-                    <div class="form-group {{ $errors->has('txt_observation') ? ' has-error' : '' }}">
-                        <label class="sr-only" for="txt_observation">Asunto: </label>
+                    <div class="form-group">
+                        <label class="sr-only" for="txt_observation">Observaciones: </label>
                         <textarea name="txt_observation" id="txt_observation" required></textarea>
-                        @if ($errors->has('txt_observation'))
-                            <span class="help-block">
-                                <strong>{{ $errors->first('txt_observation') }}</strong>
-                            </span>
-                        @endif
                     </div>
                   </div>
 
@@ -238,4 +233,27 @@
     </div>
   </div>
 </div>
+
+<script>
+
+$(document).ready(function() {
+jQuery.extend(jQuery.validator.messages, {
+  required: "Este campo es obligatorio.",
+  });
+});
+
+jQuery.validator.addMethod("lettersonly", function(value, element){
+return this.optional(element) || /^[a-z ]+$/i.test(value);
+}, "Letras solamente por favor.");
+
+$( "#form" ).validate( {
+  rules: {
+    txt_observation: {
+      required: true,
+    }
+
+  }
+});
+</script>
+
 @endsection

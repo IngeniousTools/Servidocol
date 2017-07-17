@@ -12,6 +12,7 @@ const { mix } = require('laravel-mix');
  */
 
  mix.js('resources/assets/js/app.js', 'public/js')
+  	.js('node_modules/jquery/dist/jquery.min.js', 'public/js/jquery.js')
     .js(['node_modules/datatables.net/js/jquery.dataTables.js',
          'node_modules/datatables.net-autofill/js/dataTables.autoFill.js',
          'node_modules/datatables.net-colreorder/js/dataTables.colReorder.js',

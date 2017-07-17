@@ -43,7 +43,7 @@ class IncidentController extends Controller
 
       Storage::disk('local')->put('incident'.$this->idIncident.'.json', '{"case":"'.$this->idIncident.'","subject":'.json_encode($request->input('txt_subject')).',"description":'.json_encode($request->input('txt_observation')).'}');
 
-      return back();
+      return back()->with('delivery','delivery');
     }
 
     public function ListIncident(){
@@ -75,13 +75,15 @@ class IncidentController extends Controller
       $cantIncident = Incident::all()->max('idIncident');
       if ($cantIncident >= $request->input('txt_identificationIncident')) {
         $incident = Incident::find($request->input('txt_identificationIncident'));
-        if ($incident->idAreaIncident != session('rol')) {
-          return back()->with('error','error');
+        if (session('rol')==1){
+          return $this->ViewIncident($request->input('txt_identificationIncident'));
+        }elseif($incident->idAreaIncident != session('rol')) {
+          return back()->with('delivery','delivery');
         }else{
           return $this->ViewIncident($request->input('txt_identificationIncident'));
         }
       } else {
-        return back()->with('error','error');
+        return back()->with('delivery','delivery');
       }
     }
 

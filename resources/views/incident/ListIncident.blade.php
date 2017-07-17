@@ -46,8 +46,6 @@
                     </a>
                 @endif
                 @elseif(session('rol') === 1)
-                  @if($incidents->idAreaIncident == 1)
-                    @if($incidents->aprobation == 1)
                       <td>{{$incidents->idIncident}}</td>
                       <td>{{$incidents->areaIncident->name}}</td>
                       <td>{{$incidents->priority->name}}</td>
@@ -64,8 +62,7 @@
                         <a href="{{url('incident/view')}}/{{$incidents->idIncident}}">
                           <i class="fa fa-eye fa-fw" aria-hidden="true"></i>&nbsp; Ver Detalle
                         </a>
-                    @endif
-                  @endif
+
               @elseif(session('rol') === 2)
                 @if($incidents->idAreaIncident == 2)
                   @if($incidents->aprobation == 1)

@@ -20,15 +20,25 @@
         <form role="form" action="" method="post">
           {{ csrf_field() }}
 
+          @if(session('delivery'))
+            <script type="text/javascript">
+                swal({
+                  title: 'Exito.',
+                  type: 'success',
+                  html:
+                    'Usuario registrado correctamente',
+                  showCloseButton: true,
+                  showConfirmButton: true,
+                  confirmButtonText: '<i class="fa fa-times"></i> Cerrar',
+                }).catch(swal.noop)
+
+            </script>
+          @endif
+
           <h2 class="text-center">Registro de usuarios</h2>
-          <div class="form-group {{ $errors->has('txt_identificacion') ? ' has-error' : '' }}">
+          <div class="form-group">
               <label class="sr-only" for="txt_identificacion">Identificación.</label>
               <input class="form-control" id="txt_identificacion" name="txt_identificacion" type="text" placeholder="Identificación" required>
-              @if ($errors->has('txt_identificacion'))
-                  <span class="help-block">
-                      <strong>{{ $errors->first('txt_identificacion') }}</strong>
-                  </span>
-              @endif
           </div>
 
           <div class="form-group">
@@ -41,14 +51,9 @@
               </select>
           </div>
 
-          <div class="form-group {{ $errors->has('txt_password') ? ' has-error' : '' }}">
+          <div class="form-group">
               <label class="sr-only" for="txt_password">Contraseña: </label>
               <input class="form-control" id="txt_password" name="txt_password" type="password" placeholder="Contraseña" required>
-              @if ($errors->has('txt_password'))
-                  <span class="help-block">
-                      <strong>{{ $errors->first('txt_password') }}</strong>
-                  </span>
-              @endif
           </div>
 
           <button class="btn btn-block btn-custom" type="submit" name="btn_save">Registrar</button>
@@ -58,4 +63,39 @@
     </div>
   </div>
 </div>
+
+<script>
+
+$(document).ready(function() {
+jQuery.extend(jQuery.validator.messages, {
+  required: "Este campo es obligatorio.",
+  email: "Por favor, escribe una dirección de correo válida",
+  digits: "Por favor, escribe sólo dígitos.",
+  });
+});
+
+jQuery.validator.addMethod("lettersonly", function(value, element){
+return this.optional(element) || /^[a-z ]+$/i.test(value);
+}, "Letras solamente por favor.");
+
+$.validator.addMethod("valueNotEquals", function(value, element, arg){
+ return arg !== value;
+}, "Selecciona otra opción.");
+
+$( "#form" ).validate( {
+  rules: {
+    opt_rol: {
+      valueNotEquals: "0",
+    },
+    txt_identificacion: {
+      digits: true,
+      required: false,
+    },
+    txt_password: {
+      required: false,
+    }
+  }
+});
+</script>
+
 @endsection

@@ -18,9 +18,17 @@
 
           <form role="form" method="post" action="{{action('EmployeeController@login')}}">
             @if (session('status'))
-              <div class="alert alert-danger text-center">
-                  {{ session('status') }}
-              </div>
+            <script type="text/javascript">
+                swal({
+                  title: 'Error con la sesión',
+                  type: 'error',
+                  html:
+                    'Algo ha salido mal',
+                  showCloseButton: true,
+                  confirmButtonText: '<i class="fa fa-times"></i> Cerrar',
+                }).catch(swal.noop)
+
+            </script>
             @endif
 
             {{ csrf_field() }}

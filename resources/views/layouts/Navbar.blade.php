@@ -6,8 +6,11 @@
         <link rel="stylesheet" href="{{Asset('css/app.css')}}">
         <link rel="stylesheet" href="{{Asset('css/style.css')}}">
         <link rel="stylesheet" href="{{Asset('plugins/font-awesome/css/font-awesome.min.css')}}">
+        <link rel="stylesheet" href="{{Asset('plugins/sweetalert2/dist/sweetalert2.min.css')}}">
         @yield('styles')
         <script src="{{Asset('js/app.js')}}" type="Text/JavaScript"></script>
+        <script src="{{Asset('plugins/sweetalert2/dist/sweetalert2.min.js')}}" type="Text/JavaScript"></script>
+        <script src="{{Asset('plugins/validation/dist/jquery.validate.min.js')}}" type="Text/JavaScript"></script>
         @yield('scripts')
     </head>
     <body>
@@ -26,37 +29,75 @@
 
               <ul class="nav navbar-nav">
                 <li>
-                  <a href="#" data-toggle="dropdown"> <button class="btn btn-navbar-custom" type="button">Elementos  <i class="fa fa-sort-desc" aria-hidden="true"></i></button></a>
+                  <a href="#" data-toggle="dropdown"> <button class="btn btn-navbar-custom" type="button">Inventario  <i class="fa fa-sort-desc" aria-hidden="true"></i></button></a>
                   <ul class="dropdown-menu">
                     <li>
-                      <a href="{{url('element/category/create')}}">
-                        <button type="submit" class="btn btn-navbar-custom">Crear categorias</button>
+                      <a href="{{url('element/stock/create')}}">
+                        <button type="submit" class="btn btn-navbar-custom">Crear elementos del inventario</button>
                       </a>
                     </li>
                     <li>
-                      <a href="{{url('element/category/list')}}">
-                        <button type="submit" class="btn btn-navbar-custom">Ver categorias</button>
+                      <a href="{{url('element/stock/list')}}">
+                        <button type="submit" class="btn btn-navbar-custom">Listar elementos del inventario</button>
                       </a>
                     </li>
                     <li>
-                      <a href="{{url('element/brand/create')}}">
-                        <button type="submit" class="btn btn-navbar-custom">Crear categorias</button>
+                      <a href="{{url('element/stock/report')}}">
+                        <button type="submit" class="btn btn-navbar-custom">Reportes del inventario</button>
                       </a>
                     </li>
-                    <li>
-                      <a href="{{url('element/brand/list')}}">
-                        <button type="submit" class="btn btn-navbar-custom">Ver categorias</button>
-                      </a>
+                  </ul>
+                </li>
+              </ul>
+
+              <ul class="nav navbar-nav">
+                <li>
+                  <a href="#" data-toggle="dropdown"> <button class="btn btn-navbar-custom" type="button">Elementos  <i class="fa fa-sort-desc" aria-hidden="true"></i></button></a>
+                  <ul class="dropdown-menu">
+                    <li class="dropdown-submenu">
+                      <a class="btn btn-navbar-custom text-left" href="#">Categoria<i class="fa fa-sort-desc" aria-hidden="true"></i></a>
+                      <ul class="dropdown-menu" style="background-color:#4B85E8;">
+                        <li>
+                          <a href="{{url('element/category/create')}}">
+                            <button type="submit" class="btn btn-navbar-custom">Crear categorias</button>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="{{url('element/category/list')}}">
+                            <button type="submit" class="btn btn-navbar-custom">Ver categorias</button>
+                          </a>
+                        </li>
+                      </ul>
                     </li>
-                    <li>
-                      <a href="{{url('element/create')}}">
-                        <button type="submit" class="btn btn-navbar-custom">Crear elementos</button>
-                      </a>
+                    <li class="dropdown-submenu">
+                      <a class="btn btn-navbar-custom" href="#">Marca<i class="fa fa-sort-desc" aria-hidden="true"></i></a>
+                      <ul class="dropdown-menu" style="background-color:#4B85E8;">
+                        <li>
+                          <a href="{{url('element/brand/create')}}">
+                            <button type="submit" class="btn btn-navbar-custom">Crear marca</button>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="{{url('element/brand/list')}}">
+                            <button type="submit" class="btn btn-navbar-custom">Ver marcas</button>
+                          </a>
+                        </li>
+                      </ul>
                     </li>
-                    <li>
-                      <a href="{{url('element/list')}}">
-                        <button type="submit" class="btn btn-navbar-custom">Ver elementos</button>
-                      </a>
+                    <li class="dropdown-submenu">
+                      <a class="btn btn-navbar-custom" href="#">Elementos<i class="fa fa-sort-desc" aria-hidden="true"></i></a>
+                      <ul class="dropdown-menu" style="background-color:#4B85E8;">
+                        <li>
+                          <a href="{{url('element/create')}}">
+                            <button type="submit" class="btn btn-navbar-custom">Crear elementos</button>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="{{url('element/list')}}">
+                            <button type="submit" class="btn btn-navbar-custom">Ver elementos</button>
+                          </a>
+                        </li>
+                      </ul>
                     </li>
                   </ul>
                 </li>
@@ -312,4 +353,13 @@
       @yield('content')
 
     </body>
+    <script>
+    $(document).ready(function(){
+      $('.dropdown-submenu a.btn').on("click", function(e){
+        $(this).next('ul').toggle();
+        e.stopPropagation();
+        e.preventDefault();
+      });
+    });
+    </script>
 </html>

@@ -78,11 +78,6 @@
               </div>
               <div class="col-xs-8 col-xs-offset-1">
                 <input class="form-control" id="txt_name" name="txt_name" type="text" placeholder="Nombre" value="{{$employee->name}}" disabled="" required>
-                @if ($errors->has('txt_name'))
-                <span class="help-block">
-                  <strong>{{ $errors->first('txt_name') }}</strong>
-                </span>
-                @endif
               </div>
             </div>
 
@@ -92,11 +87,6 @@
               </div>
               <div class="col-xs-8 col-xs-offset-1">
                 <input class="form-control" id="txt_lastname" name="txt_lastname" type="text" placeholder="Apellido" value="{{$employee->lastname}}" disabled="" required>
-                @if ($errors->has('txt_lastname'))
-                <span class="help-block">
-                  <strong>{{ $errors->first('txt_lastname') }}</strong>
-                </span>
-                @endif
               </div>
             </div>
 
@@ -106,11 +96,6 @@
               </div>
               <div class="col-xs-8 col-xs-offset-1">
                 <input class="form-control" id="txt_location" name="txt_location" type="text" placeholder="Dirección" value="{{$employee->location}}" disabled="" required>
-                @if ($errors->has('txt_location'))
-                <span class="help-block">
-                  <strong>{{ $errors->first('txt_location') }}</strong>
-                </span>
-                @endif
               </div>
             </div>
 
@@ -120,11 +105,6 @@
               </div>
               <div class="col-xs-8 col-xs-offset-1">
                 <input class="form-control" id="txt_celphone" name="txt_celphone" type="text" placeholder="Celular" value="{{$employee->celPhone}}" disabled="">
-                @if ($errors->has('txt_celphone'))
-                <span class="help-block">
-                  <strong>{{ $errors->first('txt_celphone') }}</strong>
-                </span>
-                @endif
               </div>
             </div>
 
@@ -134,11 +114,6 @@
               </div>
               <div class="col-xs-8 col-xs-offset-1">
                 <input class="form-control" id="txt_phone" name="txt_phone" type="text" placeholder="Teléfono" value="{{$employee->phone}}" disabled="">
-                @if ($errors->has('txt_phone'))
-                <span class="help-block">
-                  <strong>{{ $errors->first('txt_phone') }}</strong>
-                </span>
-                @endif
               </div>
             </div>
 
@@ -148,11 +123,6 @@
               </div>
               <div class="col-xs-8 col-xs-offset-1">
                 <input class="form-control" id="txt_email" name="txt_email" type="text" placeholder="Correo electrónico" value="{{$employee->email}}" disabled="" required>
-                @if ($errors->has('txt_email'))
-                <span class="help-block">
-                  <strong>{{ $errors->first('txt_email') }}</strong>
-                </span>
-                @endif
               </div>
             </div>
 
@@ -188,4 +158,59 @@
     </div>
   </div>
 </div>
+
+<script>
+
+$(document).ready(function() {
+jQuery.extend(jQuery.validator.messages, {
+  required: "Este campo es obligatorio.",
+  email: "Por favor, escribe una dirección de correo válida",
+  digits: "Por favor, escribe sólo dígitos.",
+  });
+});
+
+jQuery.validator.addMethod("lettersonly", function(value, element){
+return this.optional(element) || /^[a-z ]+$/i.test(value);
+}, "Letras solamente por favor.");
+
+$.validator.addMethod("valueNotEquals", function(value, element, arg){
+ return arg !== value;
+}, "Selecciona otra opción.");
+
+$( "#form" ).validate( {
+  rules: {
+    txt_identificacion: {
+      digits: true,
+      required: false,
+    },
+    opt_jobtitle: {
+      valueNotEquals: "0",
+    },
+    txt_name: {
+      lettersonly: true,
+      required: true,
+    },
+    txt_lastname: {
+      lettersonly: true,
+      required: true,
+    },
+    txt_location: {
+      required: false,
+    },
+    txt_celphone: {
+      digits: true,
+      required: false,
+    },
+    txt_phone: {
+      digits: true,
+      required: false,
+    },
+    txt_email: {
+      email: true,
+      required: true,
+    }
+  }
+});
+</script>
+
 @endsection

@@ -22,7 +22,6 @@ class Stock extends Migration
 
         $table->foreign('idBill')->references('idBill')->on('Bill');
 
-        $table->unique('consecutive');
       });
     }
 

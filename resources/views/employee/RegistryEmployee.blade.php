@@ -20,15 +20,25 @@
         <form role="form" action="" method="post">
           {{ csrf_field() }}
 
+          @if(session('delivery'))
+            <script type="text/javascript">
+                swal({
+                  title: 'Exito.',
+                  type: 'success',
+                  html:
+                    'Empleado registrado correctamente',
+                  showCloseButton: true,
+                  showConfirmButton: true,
+                  confirmButtonText: '<i class="fa fa-times"></i> Cerrar',
+                }).catch(swal.noop)
+
+            </script>
+          @endif
+
           <h2 class="text-center">Registro de empleados</h2>
           <div class="form-group {{ $errors->has('txt_identificacion') ? ' has-error' : '' }}">
               <label class="sr-only" for="txt_identificacion">Identificación.</label>
               <input class="form-control" id="txt_identificacion" name="txt_identificacion" type="text" placeholder="Identificación" required>
-              @if ($errors->has('txt_identificacion'))
-                  <span class="help-block">
-                      <strong>{{ $errors->first('txt_identificacion') }}</strong>
-                  </span>
-              @endif
           </div>
 
           <div class="form-group">
@@ -44,61 +54,31 @@
           <div class="form-group {{ $errors->has('txt_name') ? ' has-error' : '' }}">
               <label class="sr-only" for="txt_name">Nombre: </label>
               <input class="form-control" id="txt_name" name="txt_name" type="text" placeholder="Nombre" required>
-              @if ($errors->has('txt_name'))
-                  <span class="help-block">
-                      <strong>{{ $errors->first('txt_name') }}</strong>
-                  </span>
-              @endif
           </div>
 
           <div class="form-group {{ $errors->has('txt_lastname') ? ' has-error' : '' }}">
             <label class="sr-only" for="txt_lastname">Apellido: </label>
             <input class="form-control" id="txt_lastname" name="txt_lastname" type="text" placeholder="Apellido" required>
-            @if ($errors->has('txt_lastname'))
-                <span class="help-block">
-                    <strong>{{ $errors->first('txt_lastname') }}</strong>
-                </span>
-            @endif
           </div>
 
           <div class="form-group {{ $errors->has('txt_location') ? ' has-error' : '' }}">
             <label class="sr-only" for="txt_location">Dirección</label>
             <input class="form-control" id="txt_location" name="txt_location" type="text" placeholder="Dirección" required>
-            @if ($errors->has('txt_location'))
-                <span class="help-block">
-                    <strong>{{ $errors->first('txt_location') }}</strong>
-                </span>
-            @endif
           </div>
 
           <div class="form-group {{ $errors->has('txt_celphone') ? ' has-error' : '' }}">
               <label class="sr-only" for="txt_celphone">Celular: </label>
               <input class="form-control" id="txt_celphone" name="txt_celphone" type="text" placeholder="Celular">
-              @if ($errors->has('txt_celphone'))
-                  <span class="help-block">
-                      <strong>{{ $errors->first('txt_celphone') }}</strong>
-                  </span>
-              @endif
           </div>
 
           <div class="form-group {{ $errors->has('txt_phone') ? ' has-error' : '' }}">
             <label class="sr-only" for="txt_phone">Teléfono: </label>
             <input class="form-control" id="txt_phone" name="txt_phone" type="text" placeholder="Teléfono">
-            @if ($errors->has('txt_phone'))
-            <span class="help-block">
-              <strong>{{ $errors->first('txt_phone') }}</strong>
-            </span>
-            @endif
           </div>
 
           <div class="form-group {{ $errors->has('txt_email') ? ' has-error' : '' }}">
               <label class="sr-only" for="txt_email">Correo electrónico: </label>
               <input class="form-control" id="txt_email" name="txt_email" type="text" placeholder="Correo electrónico" required>
-              @if ($errors->has('txt_email'))
-                  <span class="help-block">
-                      <strong>{{ $errors->first('txt_email') }}</strong>
-                  </span>
-              @endif
           </div>
 
           <button class="btn btn-block btn-custom" type="submit" name="btn_save">Registrar</button>
@@ -108,4 +88,58 @@
     </div>
   </div>
 </div>
+
+<script>
+
+$(document).ready(function() {
+jQuery.extend(jQuery.validator.messages, {
+  required: "Este campo es obligatorio.",
+  email: "Por favor, escribe una dirección de correo válida",
+  digits: "Por favor, escribe sólo dígitos.",
+  });
+});
+
+jQuery.validator.addMethod("lettersonly", function(value, element){
+return this.optional(element) || /^[a-z ]+$/i.test(value);
+}, "Letras solamente por favor.");
+
+$.validator.addMethod("valueNotEquals", function(value, element, arg){
+ return arg !== value;
+}, "Selecciona otra opción.");
+
+$( "#form" ).validate( {
+  rules: {
+    txt_identificacion: {
+      digits: true,
+      required: false,
+    },
+    opt_jobtitle: {
+      valueNotEquals: "0",
+    },
+    txt_name: {
+      lettersonly: true,
+      required: true,
+    },
+    txt_lastname: {
+      lettersonly: true,
+      required: true,
+    },
+    txt_location: {
+      required: true,
+    },
+    txt_celphone: {
+      digits: true,
+      required: false,
+    },
+    txt_phone: {
+      digits: true,
+      required: false,
+    },
+    txt_email: {
+      email: true,
+      required: true,
+    }
+  }
+});
+</script>
 @endsection

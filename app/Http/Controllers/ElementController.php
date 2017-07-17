@@ -2,10 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
 use App\Element;
 use App\Category;
 use App\Deposit;
+use App\Bill;
+use App\Stock;
+
 
 class ElementController extends Controller{
 
@@ -16,6 +21,9 @@ class ElementController extends Controller{
   protected $dateRedistribution;
   protected $status;
 
+  public static $initial;
+  public static $finish;
+
   protected function CreateElement(Request $request){
     $element = new Element;
     $element->idItem = null;
@@ -25,7 +33,7 @@ class ElementController extends Controller{
     $element->status = 1;
     $element->save();
 
-    return redirect('element/list');
+    return back()->with('delivery','delivery');
   }
 
   public function ListElement(){
@@ -62,16 +70,66 @@ class ElementController extends Controller{
 
   }
 
-  protected function CreateElementStock(){
+  protected function CreateElementStock(Request $request){
+    $stock = new Bill;
+    $stock->idBill = null;
+    $stock->idItem = $request->input('opt_element');
+    $stock->idBrand = $request->input('opt_brand');
+    $stock->price = $request->input('txt_price');
+    $stock->quantity = $request->input('txt_quantity');
+    $stock->dateBuy = $request->input('txt_date');
+    $stock->save();
 
+    return back()->with('delivery','delivery');
   }
 
   protected function ListElementStock(){
 
+    $bills = DB::table('bill')
+            ->select(DB::raw('item.name as item, brand.name as brand, (SUM(price)) as price, (SUM(quantity)) as quantity'))
+            ->join('brand','bill.idBrand','=','brand.idBrand')
+            ->join('item','item.idItem','=','item.idItem')
+            ->whereRaw('item.idItem=bill.idItem')
+            ->whereRaw('brand.idBrand=bill.idBrand')
+            ->where([['brand.status','1'],['item.status','1']])
+            ->groupBy('brand')
+            ->groupBy('item')->get();
+
+    $data = array('title' => 'Lista de elementos',
+                  'bills' => $bills);
+    //return $bills;
+    return view('stock.ListStock',$data);
+
+  }
+
+  protected function ReportElementStock(Request $request){
+
+    self::$initial = $request->input('txt_initialDate');
+    self::$finish = $request->input('txt_finishDate');
+
+    Excel::create('Reporte desde '.self::$initial . ' hasta ' .self::$finish, function($excel) {
+      $excel->sheet('Reporte',function($sheet) {
+
+        $bills = DB::table('bill')
+                ->select(DB::raw('item.name as item, brand.name as brand, (SUM(price)) as price, (SUM(quantity)) as quantity'))
+                ->join('brand','bill.idBrand','=','brand.idBrand')
+                ->join('item','item.idItem','=','item.idItem')
+                ->whereRaw('item.idItem=bill.idItem')
+                ->whereRaw('brand.idBrand=bill.idBrand')
+                ->where([['brand.status','1'],['item.status','1']])
+                ->whereBetween('dateBuy',[self::$initial,self::$finish])
+                ->groupBy('brand')
+                ->groupBy('item')->get();
+        //$bills = Bill::where([['dateBuy','>=',self::$initial],['dateBuy','<=',self::$finish]])->get();
+        $data = array('bills' => $bills);
+        $sheet->loadView('stock.ReportDownloadStock',$data);
+      });
+    })->export('xlsx');
+    
   }
 
   protected function UpdateElementStock(){
-    
+
   }
 
 }

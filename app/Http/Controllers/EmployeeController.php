@@ -37,7 +37,7 @@ class EmployeeController extends Controller{
       $employee->status=1;
       $employee->save();
 
-      return $this->ListEmployee();
+      return back()->with('delivery','delivery');
     }
 
     public function ListEmployee(){
@@ -79,7 +79,7 @@ class EmployeeController extends Controller{
       $user->status = 1;
       $user->save();
 
-      return $this->ListUser();
+      return back()->with('delivery','delivery');
     }
 
     public function ListUser(){

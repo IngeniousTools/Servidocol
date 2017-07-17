@@ -95,4 +95,26 @@
     </div>
   </div>
 </div>
+
+<script>
+
+$(document).ready(function() {
+jQuery.extend(jQuery.validator.messages, {
+  required: "Este campo es obligatorio.",
+  });
+});
+
+jQuery.validator.addMethod("lettersonly", function(value, element){
+return this.optional(element) || /^[a-z ]+$/i.test(value);
+}, "Letras solamente por favor.");
+
+$( "#form" ).validate( {
+  rules: {
+    txt_name: {
+      lettersonly: true,
+      required: true,
+    }
+  }
+});
+</script>
 @endsection

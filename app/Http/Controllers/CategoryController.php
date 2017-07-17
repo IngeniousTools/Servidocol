@@ -22,7 +22,7 @@ class CategoryController extends Controller{
       $category->status = 1;
       $category->save();
 
-      return redirect('element/category/list');
+      return back()->with('delivery','delivery');
     }
 
     public function ListCategory(){

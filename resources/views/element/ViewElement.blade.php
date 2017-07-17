@@ -95,11 +95,6 @@
             </div>
             <div class="col-xs-8 col-xs-offset-1">
               <input class="form-control" id="txt_name" name="txt_name" type="text" placeholder="Nombre" value="{{$element->name}}" disabled="" required>
-              @if ($errors->has('txt_name'))
-              <span class="help-block">
-                <strong>{{ $errors->first('txt_name') }}</strong>
-              </span>
-              @endif
             </div>
           </div>
 
@@ -132,4 +127,37 @@
     </div>
   </div>
 </div>
+
+<script>
+
+$(document).ready(function() {
+jQuery.extend(jQuery.validator.messages, {
+  required: "Este campo es obligatorio.",
+  });
+});
+
+jQuery.validator.addMethod("lettersonly", function(value, element){
+return this.optional(element) || /^[a-z ]+$/i.test(value);
+}, "Letras solamente por favor.");
+
+$.validator.addMethod("valueNotEquals", function(value, element, arg){
+ return arg !== value;
+}, "Selecciona otra opción.");
+
+$( "#form" ).validate( {
+  rules: {
+    opt_deposit: {
+      valueNotEquals: "0",
+    },
+    opt_category: {
+      valueNotEquals: "0",
+    },
+    txt_name: {
+      lettersonly: true,
+      required: true,
+    }
+  }
+});
+</script>
+
 @endsection
