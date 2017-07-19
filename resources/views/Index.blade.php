@@ -9,6 +9,20 @@
 @section('content')
   @include('layouts.Slider')
 
+  @if(session('errorincident'))
+    <script type="text/javascript">
+        swal({
+          title: 'Error',
+          type: 'error',
+          html:
+            'No hay incidentes registrados.',
+          showCloseButton: true,
+          confirmButtonText: '<i class="fa fa-times"></i> Cerrar',
+        }).catch(swal.noop)
+
+    </script>
+  @endif
+
 <div class="container">
   <div class="row">
     <div class="col-md-8 col-md-offset-2">

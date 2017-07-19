@@ -30,6 +30,7 @@ class ElementController extends Controller{
     $element->idCategory = $request->input('opt_category');
     $element->idDeposit = $request->input('opt_deposit');
     $element->name = $request->input('txt_name');
+    $element->Category = $request->input('opt_abc');
     $element->status = 1;
     $element->save();
 
@@ -59,6 +60,7 @@ class ElementController extends Controller{
     $elements->idCategory = $request->input('opt_category');
     $elements->idDeposit = $request->input('opt_deposit');
     $elements->name = $request->input('txt_name');
+    $elements->Category = $request->input('opt_abc');
     $elements->status = $request->input('opt_status');
     $elements->save();
 
@@ -86,13 +88,14 @@ class ElementController extends Controller{
   protected function ListElementStock(){
 
     $bills = DB::table('bill')
-            ->select(DB::raw('item.name as item, brand.name as brand, (SUM(price)) as price, (SUM(quantity)) as quantity'))
+            ->select(DB::raw('item.name as item, item.Category as clasification, brand.name as brand, (SUM(price)) as price, (SUM(quantity)) as quantity'))
             ->join('brand','bill.idBrand','=','brand.idBrand')
             ->join('item','item.idItem','=','item.idItem')
             ->whereRaw('item.idItem=bill.idItem')
             ->whereRaw('brand.idBrand=bill.idBrand')
             ->where([['brand.status','1'],['item.status','1']])
             ->groupBy('brand')
+            ->groupBy('clasification')
             ->groupBy('item')->get();
 
     $data = array('title' => 'Lista de elementos',
@@ -111,7 +114,7 @@ class ElementController extends Controller{
       $excel->sheet('Reporte',function($sheet) {
 
         $bills = DB::table('bill')
-                ->select(DB::raw('item.name as item, brand.name as brand, (SUM(price)) as price, (SUM(quantity)) as quantity'))
+                ->select(DB::raw('item.name as item, item.Category as clasification, brand.name as brand, (SUM(price)) as price, (SUM(quantity)) as quantity'))
                 ->join('brand','bill.idBrand','=','brand.idBrand')
                 ->join('item','item.idItem','=','item.idItem')
                 ->whereRaw('item.idItem=bill.idItem')
@@ -119,13 +122,14 @@ class ElementController extends Controller{
                 ->where([['brand.status','1'],['item.status','1']])
                 ->whereBetween('dateBuy',[self::$initial,self::$finish])
                 ->groupBy('brand')
+                ->groupBy('clasification')
                 ->groupBy('item')->get();
         //$bills = Bill::where([['dateBuy','>=',self::$initial],['dateBuy','<=',self::$finish]])->get();
         $data = array('bills' => $bills);
         $sheet->loadView('stock.ReportDownloadStock',$data);
       });
     })->export('xlsx');
-    
+
   }
 
   protected function UpdateElementStock(){

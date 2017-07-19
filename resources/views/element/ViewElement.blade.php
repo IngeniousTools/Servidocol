@@ -41,7 +41,7 @@
     <div class="form-position col-xs-12 col-md-6 col-md-offset-3">
 
       <div class="form-content">
-        <form role="form" action="{{action('ElementController@UpdateElement',[$element->idItem])}}" method="post">
+        <form role="form" action="{{action('ElementController@UpdateElement',[$element->idItem])}}" method="post" id="form">
           {{ csrf_field() }}
 
           <h2 class="text-center">Visualización de elementos</h2>
@@ -89,12 +89,31 @@
           <br>
           <br>
 
-          <div class="form-group {{ $errors->has('txt_name') ? ' has-error' : '' }}">
+          <div class="form-group">
             <div class="col-xs-3">
               <label for="txt_name">Nombre: </label>
             </div>
             <div class="col-xs-8 col-xs-offset-1">
-              <input class="form-control" id="txt_name" name="txt_name" type="text" placeholder="Nombre" value="{{$element->name}}" disabled="" required>
+              <input class="form-control" id="txt_name" name="txt_name" type="text" placeholder="Nombre" value="{{$element->name}}" disabled="" required maxlength="20">
+            </div>
+          </div>
+
+          <br>
+          <br>
+
+
+          <div class="form-group">
+            <div class="col-xs-3">
+              <label class="text-center" for="opt_category">Categoria: </label>
+            </div>
+            <div class="col-xs-8 col-xs-offset-1">
+              <select class="form-control" id="opt_abc" name="opt_abc" disabled="" required>
+
+                <option	value="A" @if($element->Category == 'A') selected="" @endif> A </option>
+                <option	value="B" @if($element->Category == 'B') selected="" @endif> B </option>
+                <option	value="C" @if($element->Category == 'C') selected="" @endif> C </option>
+
+              </select>
             </div>
           </div>
 
@@ -147,6 +166,9 @@ $.validator.addMethod("valueNotEquals", function(value, element, arg){
 $( "#form" ).validate( {
   rules: {
     opt_deposit: {
+      valueNotEquals: "0",
+    },
+    opt_abc: {
       valueNotEquals: "0",
     },
     opt_category: {

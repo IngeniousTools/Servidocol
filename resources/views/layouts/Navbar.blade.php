@@ -105,7 +105,7 @@
 
               <ul class="nav navbar-nav">
                 <li>
-                  <a href="#" data-toggle="dropdown"> <button class="btn btn-navbar-custom" type="button">Incidentes  <i class="fa fa-sort-desc" aria-hidden="true"></i></button></a>
+                  <a href="#" data-toggle="dropdown"> <button class="btn btn-navbar-custom" type="button">Incidencias  <i class="fa fa-sort-desc" aria-hidden="true"></i></button></a>
                   <ul class="dropdown-menu">
                     <li>
                       <a href="{{url('incident/list')}}">
@@ -153,6 +153,11 @@
                         <button type="submit" class="btn btn-navbar-custom">Ver usuarios</button>
                       </a>
                     </li>
+                    <li>
+                      <a href="{{url('user/restoreuserpassword')}}">
+                        <button type="submit" class="btn btn-navbar-custom">Restablecer contraseña</button>
+                      </a>
+                    </li>
                   </ul>
                 </li>
               </ul>
@@ -161,6 +166,11 @@
                 <li>
                   <a href="#" data-toggle="dropdown"> <button class="btn btn-navbar-custom" type="button">{{session('name')}}  <i class="fa fa-sort-desc" aria-hidden="true"></i></button></a>
                   <ul class="dropdown-menu">
+                    <li>
+                      <a href="{{url('user/restore')}}">
+                        <button type="submit" class="btn btn-navbar-custom">Cambiar contraseña</button>
+                      </a>
+                    </li>
                     <li>
                       <a href="{{url('logout')}}">
                         <button type="submit" class="btn btn-navbar-custom">Cerrar sesión</button>
@@ -173,7 +183,7 @@
 
               <ul class="nav navbar-nav">
                 <li>
-                  <a href="#" data-toggle="dropdown"> <button class="btn btn-navbar-custom" type="button">Incidentes  <i class="fa fa-sort-desc" aria-hidden="true"></i></button></a>
+                  <a href="#" data-toggle="dropdown"> <button class="btn btn-navbar-custom" type="button">Incidencias  <i class="fa fa-sort-desc" aria-hidden="true"></i></button></a>
                   <ul class="dropdown-menu">
                     <li>
                       <a href="{{url('incident/list')}}">
@@ -193,6 +203,11 @@
                 <li>
                   <a href="#" data-toggle="dropdown"> <button class="btn btn-navbar-custom" type="button">{{session('name')}}  <i class="fa fa-sort-desc" aria-hidden="true"></i></button></a>
                   <ul class="dropdown-menu">
+                    <li>
+                      <a href="{{url('user/restore')}}">
+                        <button type="submit" class="btn btn-navbar-custom">Cambiar contraseña</button>
+                      </a>
+                    </li>
                     <li>
                       <a href="{{url('logout')}}">
                         <button type="submit" class="btn btn-navbar-custom">Cerrar sesión</button>
@@ -206,7 +221,7 @@
 
               <ul class="nav navbar-nav">
                 <li>
-                  <a href="#" data-toggle="dropdown"> <button class="btn btn-navbar-custom" type="button">Incidentes  <i class="fa fa-sort-desc" aria-hidden="true"></i></button></a>
+                  <a href="#" data-toggle="dropdown"> <button class="btn btn-navbar-custom" type="button">Incidencias  <i class="fa fa-sort-desc" aria-hidden="true"></i></button></a>
                   <ul class="dropdown-menu">
                     <li>
                       <a href="{{url('incident/list')}}">
@@ -226,6 +241,11 @@
                 <li>
                   <a href="#" data-toggle="dropdown"> <button class="btn btn-navbar-custom" type="button">{{session('name')}}  <i class="fa fa-sort-desc" aria-hidden="true"></i></button></a>
                   <ul class="dropdown-menu">
+                    <li>
+                      <a href="{{url('user/restore')}}">
+                        <button type="submit" class="btn btn-navbar-custom">Cambiar contraseña</button>
+                      </a>
+                    </li>
                     <li>
                       <a href="{{url('logout')}}">
                         <button type="submit" class="btn btn-navbar-custom">Cerrar sesión</button>
@@ -242,6 +262,11 @@
                   <a href="#" data-toggle="dropdown"> <button class="btn btn-navbar-custom" type="button">{{session('name')}}  <i class="fa fa-sort-desc" aria-hidden="true"></i></button></a>
                   <ul class="dropdown-menu">
                     <li>
+                      <a href="{{url('user/restore')}}">
+                        <button type="submit" class="btn btn-navbar-custom">Cambiar contraseña</button>
+                      </a>
+                    </li>
+                    <li>
                       <a href="{{url('logout')}}">
                         <button type="submit" class="btn btn-navbar-custom">Cerrar sesión</button>
                       </a>
@@ -256,6 +281,11 @@
                 <li>
                   <a href="#" data-toggle="dropdown"> <button class="btn btn-navbar-custom" type="button">{{session('name')}}  <i class="fa fa-sort-desc" aria-hidden="true"></i></button></a>
                   <ul class="dropdown-menu">
+                    <li>
+                      <a href="{{url('user/restore')}}">
+                        <button type="submit" class="btn btn-navbar-custom">Cambiar contraseña</button>
+                      </a>
+                    </li>
                     <li>
                       <a href="{{url('logout')}}">
                         <button type="submit" class="btn btn-navbar-custom">Cerrar sesión</button>
@@ -272,6 +302,11 @@
                   <a href="#" data-toggle="dropdown"> <button class="btn btn-navbar-custom" type="button">{{session('name')}}  <i class="fa fa-sort-desc" aria-hidden="true"></i></button></a>
                   <ul class="dropdown-menu">
                     <li>
+                      <a href="{{url('user/restore')}}">
+                        <button type="submit" class="btn btn-navbar-custom">Cambiar contraseña</button>
+                      </a>
+                    </li>
+                    <li>
                       <a href="{{url('logout')}}">
                         <button type="submit" class="btn btn-navbar-custom">Cerrar sesión</button>
                       </a>
@@ -287,6 +322,11 @@
                   <a href="#" data-toggle="dropdown"> <button class="btn btn-navbar-custom" type="button">{{session('name')}}  <i class="fa fa-sort-desc" aria-hidden="true"></i></button></a>
                   <ul class="dropdown-menu">
                     <li>
+                      <a href="{{url('user/restore')}}">
+                        <button type="submit" class="btn btn-navbar-custom">Cambiar contraseña</button>
+                      </a>
+                    </li>
+                    <li>
                       <a href="{{url('logout')}}">
                         <button type="submit" class="btn btn-navbar-custom">Cerrar sesión</button>
                       </a>
@@ -299,7 +339,7 @@
 
               <ul class="nav navbar-nav">
                 <li>
-                  <a href="#" data-toggle="dropdown"> <button class="btn btn-navbar-custom" type="button">Incidentes  <i class="fa fa-sort-desc" aria-hidden="true"></i></button></a>
+                  <a href="#" data-toggle="dropdown"> <button class="btn btn-navbar-custom" type="button">Incidencias  <i class="fa fa-sort-desc" aria-hidden="true"></i></button></a>
                   <ul class="dropdown-menu">
                     <li>
                       <a href="{{url('incident/create')}}">
@@ -324,6 +364,11 @@
                 <li>
                   <a href="#" data-toggle="dropdown"> <button class="btn btn-navbar-custom" type="button">{{session('name')}}  <i class="fa fa-sort-desc" aria-hidden="true"></i></button></a>
                   <ul class="dropdown-menu">
+                    <li>
+                      <a href="{{url('user/restore')}}">
+                        <button type="submit" class="btn btn-navbar-custom">Cambiar contraseña</button>
+                      </a>
+                    </li>
                     <li>
                       <a href="{{url('logout')}}">
                         <button type="submit" class="btn btn-navbar-custom">Cerrar sesión</button>

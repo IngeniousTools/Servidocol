@@ -41,7 +41,7 @@
     <div class="form-position col-xs-12 col-md-6 col-md-offset-3">
       <div class="form-content">
         <div class="form-content text-center">
-          <form role="form" action="{{action('EmployeeController@UpdateUser',[$user->idUser])}}" method="post">
+          <form role="form" action="{{action('EmployeeController@UpdateUser',[$user->idUser])}}" method="post" id="form">
             {{ csrf_field() }}
 
             <h3 class="text-center">Información de {{$user->employee->name}} {{$user->employee->lastname}}</h3>
@@ -70,7 +70,7 @@
                 <select class="form-control" id="opt_rol" name="opt_rol" disabled="" required>
                   @foreach ($rol as $rols)
                   <option	value="{{$rols->idRol}}"
-                  @if($rols->idRols === $rols->idRol)
+                  @if($user->idRol === $rols->idRol)
                     selected=""
                   @endif
                     > {{ $rols->name }} </option>

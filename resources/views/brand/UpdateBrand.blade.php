@@ -42,7 +42,7 @@
 
       <div class="form-content">
         @foreach($brands as $brand)
-        <form role="form" action="{{action('BrandController@UpdateBrand',[$brand->idBrand])}}" method="post">
+        <form role="form" action="{{action('BrandController@UpdateBrand',[$brand->idBrand])}}" method="post" id="form">
           {{ csrf_field() }}
 
           <h2 class="text-center">Actualización de marca de elemento</h2>
@@ -51,12 +51,12 @@
           <br>
 
 
-          <div class="form-group {{ $errors->has('txt_name') ? ' has-error' : '' }}">
+          <div class="form-group">
             <div class="col-xs-3">
               <label for="txt_name">Nombre: </label>
             </div>
             <div class="col-xs-8 col-xs-offset-1">
-              <input class="form-control" id="txt_name" name="txt_name" type="text" placeholder="Nombre" value="{{$brand->name}}" disabled="" required>
+              <input class="form-control" id="txt_name" name="txt_name" type="text" placeholder="Nombre" value="{{$brand->name}}" disabled="" required maxlength="20">
             </div>
           </div>
 

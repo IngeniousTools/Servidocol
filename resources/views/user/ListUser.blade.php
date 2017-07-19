@@ -26,11 +26,11 @@
                 <td>{{$users->rol->name}}</td>
                 <td>
                   @if($users->status === 1)
-                    Activo
+                    <label class="bg-success text-success">Activo</label>
                   @elseif($users->status === 0)
-                    Inactivo
+                    <label class="bg-danger text-danger">Inactivo</label>
                   @endif
-                  </td>
+                </td>
                 <td>
                   <a href="{{url('user/view')}}/{{$users->idUser}}">
                     <i class="fa fa-eye fa-fw" aria-hidden="true"></i>&nbsp; Ver detalles

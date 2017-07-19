@@ -42,7 +42,7 @@
     <div class="form-position col-xs-12 col-md-8 col-md-offset-2">
       <div class="form-content">
         <div class="form-content text-center">
-          <form role="form" action="{{action('EmployeeController@UpdateEmployee',[$employee->idEmployee])}}" method="post">
+          <form role="form" action="{{action('EmployeeController@UpdateEmployee',[$employee->idEmployee])}}" method="post" id="form">
             {{ csrf_field() }}
 
             <h3 class="text-center">Información de {{$employee->name}} {{$employee->lastname}}</h3>
@@ -72,57 +72,57 @@
               </div>
             </div>
 
-            <div class="form-group {{ $errors->has('txt_name') ? ' has-error' : '' }}">
+            <div class="form-group">
               <div class="col-xs-3">
                 <label for="txt_name">Nombre: </label>
               </div>
               <div class="col-xs-8 col-xs-offset-1">
-                <input class="form-control" id="txt_name" name="txt_name" type="text" placeholder="Nombre" value="{{$employee->name}}" disabled="" required>
+                <input class="form-control" id="txt_name" name="txt_name" type="text" placeholder="Nombre" value="{{$employee->name}}" disabled="" required maxlength="40">
               </div>
             </div>
 
-            <div class="form-group {{ $errors->has('txt_lastname') ? ' has-error' : '' }}">
+            <div class="form-group">
               <div class="col-xs-3">
                 <label for="txt_lastname">Apellido: </label>
               </div>
               <div class="col-xs-8 col-xs-offset-1">
-                <input class="form-control" id="txt_lastname" name="txt_lastname" type="text" placeholder="Apellido" value="{{$employee->lastname}}" disabled="" required>
+                <input class="form-control" id="txt_lastname" name="txt_lastname" type="text" placeholder="Apellido" value="{{$employee->lastname}}" disabled="" required maxlength="40">
               </div>
             </div>
 
-            <div class="form-group {{ $errors->has('txt_location') ? ' has-error' : '' }}">
+            <div class="form-group">
               <div class="col-xs-3">
                 <label for="txt_location">Dirección: </label>
               </div>
               <div class="col-xs-8 col-xs-offset-1">
-                <input class="form-control" id="txt_location" name="txt_location" type="text" placeholder="Dirección" value="{{$employee->location}}" disabled="" required>
+                <input class="form-control" id="txt_location" name="txt_location" type="text" placeholder="Dirección" value="{{$employee->location}}" disabled="" required maxlength="35">
               </div>
             </div>
 
-            <div class="form-group {{ $errors->has('txt_celphone') ? ' has-error' : '' }}">
+            <div class="form-group">
               <div class="col-xs-3">
                 <label for="txt_celphone">Celular: </label>
               </div>
               <div class="col-xs-8 col-xs-offset-1">
-                <input class="form-control" id="txt_celphone" name="txt_celphone" type="text" placeholder="Celular" value="{{$employee->celPhone}}" disabled="">
+                <input class="form-control" id="txt_celphone" name="txt_celphone" type="text" placeholder="Celular" value="{{$employee->celPhone}}" disabled="" maxlength="10">
               </div>
             </div>
 
-            <div class="form-group {{ $errors->has('txt_phone') ? ' has-error' : '' }}">
+            <div class="form-group">
               <div class="col-xs-3">
                 <label for="txt_phone">Teléfono: </label>
               </div>
               <div class="col-xs-8 col-xs-offset-1">
-                <input class="form-control" id="txt_phone" name="txt_phone" type="text" placeholder="Teléfono" value="{{$employee->phone}}" disabled="">
+                <input class="form-control" id="txt_phone" name="txt_phone" type="text" placeholder="Teléfono" value="{{$employee->phone}}" disabled="" maxlength="10">
               </div>
             </div>
 
-            <div class="form-group {{ $errors->has('txt_email') ? ' has-error' : '' }}">
+            <div class="form-group">
               <div class="col-xs-3">
                 <label for="txt_email">Correo electrónico: </label>
               </div>
               <div class="col-xs-8 col-xs-offset-1">
-                <input class="form-control" id="txt_email" name="txt_email" type="text" placeholder="Correo electrónico" value="{{$employee->email}}" disabled="" required>
+                <input class="form-control" id="txt_email" name="txt_email" type="text" placeholder="Correo electrónico" value="{{$employee->email}}" disabled="" required maxlength="50">
               </div>
             </div>
 
@@ -179,10 +179,6 @@ $.validator.addMethod("valueNotEquals", function(value, element, arg){
 
 $( "#form" ).validate( {
   rules: {
-    txt_identificacion: {
-      digits: true,
-      required: false,
-    },
     opt_jobtitle: {
       valueNotEquals: "0",
     },
@@ -195,7 +191,7 @@ $( "#form" ).validate( {
       required: true,
     },
     txt_location: {
-      required: false,
+      required: true,
     },
     txt_celphone: {
       digits: true,

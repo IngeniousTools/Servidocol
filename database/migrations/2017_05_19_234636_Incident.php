@@ -18,8 +18,8 @@ class Incident extends Migration
         $table->tinyInteger('idAreaIncident')->unsigned();
         $table->tinyInteger('idPriority')->unsigned();
         $table->string('userName',45);
-        $table->integer('celPhone')->nullable();
-        $table->integer('phone')->nullable();
+        $table->bigInteger('celPhone')->nullable();
+        $table->bigInteger('phone')->nullable();
         $table->string('email',40);
         $table->date('date');
         $table->boolean('aprobation');

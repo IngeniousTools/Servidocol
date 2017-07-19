@@ -219,7 +219,7 @@
 
                     <div class="form-group">
                         <label class="sr-only" for="opt_priority">Prioridad: </label>
-                        <select class="form-control" id="opt_areaIncident" name="opt_priority" type="text"  required>
+                        <select class="form-control" id="opt_priority" name="opt_priority" type="text"  required>
                           <option	value="0"> Prioridad</option>
                           @foreach ($priorizations as $priorization)
                             <option	value="{{$priorization->idPriority}}"> {{ $priorization->name }} </option>
@@ -227,14 +227,9 @@
                         </select>
                     </div>
 
-                    <div class="form-group {{ $errors->has('txt_observation') ? ' has-error' : '' }}">
+                    <div class="form-group ">
                         <label class="sr-only" for="txt_observation">Asunto: </label>
                         <textarea name="txt_observation" id="txt_observation" required></textarea>
-                        @if ($errors->has('txt_observation'))
-                            <span class="help-block">
-                                <strong>{{ $errors->first('txt_observation') }}</strong>
-                            </span>
-                        @endif
                     </div>
                   </div>
 
@@ -254,4 +249,34 @@
     </div>
   </div>
 </div>
+
+<script>
+
+$(document).ready(function() {
+jQuery.extend(jQuery.validator.messages, {
+  required: "Este campo es obligatorio.",
+  email: "Por favor, escribe una dirección de correo válida",
+  digits: "Por favor, escribe sólo dígitos.",
+  });
+});
+
+jQuery.validator.addMethod("lettersonly", function(value, element){
+return this.optional(element) || /^[a-z ]+$/i.test(value);
+}, "Letras solamente por favor.");
+
+$.validator.addMethod("valueNotEquals", function(value, element, arg){
+ return arg !== value;
+}, "Selecciona otra opción.");
+
+$( "#form" ).validate( {
+  rules: {
+    opt_areaIncident: {
+      valueNotEquals: "0",
+    },
+    opt_priority: {
+      valueNotEquals: "0",
+    },
+  }
+});
+</script>
 @endsection

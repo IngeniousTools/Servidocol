@@ -10,6 +10,19 @@
   <div class="container form-position">
     <div class="row">
       <div class="col-xs-12 col-md-10 col-md-offset-1">
+        @if(session('error'))
+          <script type="text/javascript">
+              swal({
+                title: 'Error',
+                type: 'error',
+                html:
+                  'No hay incidentes registrados.',
+                showCloseButton: true,
+                confirmButtonText: '<i class="fa fa-times"></i> Cerrar',
+              }).catch(swal.noop)
+
+          </script>
+        @endif
         <table id="table_id" class="table table-striped table-bordered dataTable">
           <thead>
             <tr>
@@ -64,7 +77,7 @@
                         </a>
 
               @elseif(session('rol') === 2)
-                @if($incidents->idAreaIncident == 2)
+                @if($incidents->idAreaIncident == 3)
                   @if($incidents->aprobation == 1)
                     <td>{{$incidents->idIncident}}</td>
                     <td>{{$incidents->areaIncident->name}}</td>
@@ -85,7 +98,7 @@
                   @endif
                 @endif
               @elseif(session('rol') === 3)
-                @if($incidents->idAreaIncident == 3)
+                @if($incidents->idAreaIncident == 2)
                   @if($incidents->aprobation == 1)
                     <td>{{$incidents->idIncident}}</td>
                     <td>{{$incidents->areaIncident->name}}</td>

@@ -28,9 +28,9 @@
                 <td>{{$employees->jobtitle->name}}</td>
                 <td>
                   @if($employees->status === 1)
-                    Activo
+                    <label class="bg-success text-success">Activo</label>
                   @elseif($employees->status === 0)
-                    Inactivo
+                    <label class="bg-danger text-danger">Inactivo</label>
                   @endif
                   </td>
                 <td>

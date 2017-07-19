@@ -17,7 +17,7 @@
     <div class="form-position col-xs-12 col-md-6 col-md-offset-3">
 
       <div class="form-content">
-        <form role="form" action="" method="post">
+        <form role="form" action="" method="post" id="form">
           {{ csrf_field() }}
 
           @if(session('delivery'))
@@ -37,9 +37,9 @@
 
           <h2 class="text-center">Registro de categorias</h2>
 
-          <div class="form-group {{ $errors->has('txt_name') ? ' has-error' : '' }}">
+          <div class="form-group">
             <label class="sr-only" for="txt_name">Nombre: </label>
-            <input class="form-control" id="txt_name" name="txt_name" type="text" placeholder="Nombre" required>
+            <input class="form-control" id="txt_name" name="txt_name" type="text" placeholder="Nombre" required maxlength="20">
           </div>
 
           <button class="btn btn-block btn-custom" type="submit" name="btn_save">Registrar</button>

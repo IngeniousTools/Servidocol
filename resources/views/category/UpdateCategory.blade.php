@@ -42,7 +42,7 @@
 
       <div class="form-content">
         @foreach($categories as $category)
-        <form role="form" action="{{action('CategoryController@UpdateCategory',[$category->idCategory])}}" method="post">
+        <form role="form" action="{{action('CategoryController@UpdateCategory',[$category->idCategory])}}" method="post" id="form">
           {{ csrf_field() }}
 
           <h2 class="text-center">Actualización de categoria</h2>
@@ -51,17 +51,12 @@
           <br>
 
 
-          <div class="form-group {{ $errors->has('txt_name') ? ' has-error' : '' }}">
+          <div class="form-group">
             <div class="col-xs-3">
               <label for="txt_name">Nombre: </label>
             </div>
             <div class="col-xs-8 col-xs-offset-1">
-              <input class="form-control" id="txt_name" name="txt_name" type="text" placeholder="Nombre" value="{{$category->name}}" disabled="" required>
-              @if ($errors->has('txt_name'))
-              <span class="help-block">
-                <strong>{{ $errors->first('txt_name') }}</strong>
-              </span>
-              @endif
+              <input class="form-control" id="txt_name" name="txt_name" type="text" placeholder="Nombre" value="{{$category->name}}" disabled="" required maxlength="20">
             </div>
           </div>
 

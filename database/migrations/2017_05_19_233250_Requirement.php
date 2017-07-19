@@ -19,7 +19,6 @@ class Requirement extends Migration
         $table->date('date');
         $table->boolean('autorization');
         $table->date('deliveryDate');
-        $table->tinyInteger('quantity');
 
         $table->foreign('idEmployee')->references('idEmployee')->on('Employee');
       });

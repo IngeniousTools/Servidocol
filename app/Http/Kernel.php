@@ -59,5 +59,6 @@ class Kernel extends HttpKernel
         'OperationsManager' => \App\Http\Middleware\OperationsManager::class,
         'IncidentCreate' => \App\Http\Middleware\IncidentCreate::class,
         'IncidentList' => \App\Http\Middleware\IncidentList::class,
+        'IsLogged' => \App\Http\Middleware\IsLogged::class,
     ];
 }

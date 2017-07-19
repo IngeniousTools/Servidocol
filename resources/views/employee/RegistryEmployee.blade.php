@@ -17,7 +17,7 @@
     <div class="form-position col-xs-12 col-md-6 col-md-offset-3">
 
       <div class="form-content">
-        <form role="form" action="" method="post">
+        <form role="form" action="" method="post" id="form">
           {{ csrf_field() }}
 
           @if(session('delivery'))
@@ -36,9 +36,9 @@
           @endif
 
           <h2 class="text-center">Registro de empleados</h2>
-          <div class="form-group {{ $errors->has('txt_identificacion') ? ' has-error' : '' }}">
-              <label class="sr-only" for="txt_identificacion">Identificación.</label>
-              <input class="form-control" id="txt_identificacion" name="txt_identificacion" type="text" placeholder="Identificación" required>
+          <div class="form-group">
+              <label class="sr-only" for="txt_identification">Identificación.</label>
+              <input class="form-control" id="txt_identification" name="txt_identification" type="text" placeholder="Identificación" required maxlength="10">
           </div>
 
           <div class="form-group">
@@ -51,34 +51,34 @@
               </select>
           </div>
 
-          <div class="form-group {{ $errors->has('txt_name') ? ' has-error' : '' }}">
+          <div class="form-group">
               <label class="sr-only" for="txt_name">Nombre: </label>
-              <input class="form-control" id="txt_name" name="txt_name" type="text" placeholder="Nombre" required>
+              <input class="form-control" id="txt_name" name="txt_name" type="text" placeholder="Nombre" required maxlength="40">
           </div>
 
-          <div class="form-group {{ $errors->has('txt_lastname') ? ' has-error' : '' }}">
+          <div class="form-group">
             <label class="sr-only" for="txt_lastname">Apellido: </label>
-            <input class="form-control" id="txt_lastname" name="txt_lastname" type="text" placeholder="Apellido" required>
+            <input class="form-control" id="txt_lastname" name="txt_lastname" type="text" placeholder="Apellido" required maxlength="40">
           </div>
 
-          <div class="form-group {{ $errors->has('txt_location') ? ' has-error' : '' }}">
+          <div class="form-group">
             <label class="sr-only" for="txt_location">Dirección</label>
-            <input class="form-control" id="txt_location" name="txt_location" type="text" placeholder="Dirección" required>
+            <input class="form-control" id="txt_location" name="txt_location" type="text" placeholder="Dirección" required maxlength="35">
           </div>
 
-          <div class="form-group {{ $errors->has('txt_celphone') ? ' has-error' : '' }}">
+          <div class="form-group">
               <label class="sr-only" for="txt_celphone">Celular: </label>
-              <input class="form-control" id="txt_celphone" name="txt_celphone" type="text" placeholder="Celular">
+              <input class="form-control" id="txt_celphone" name="txt_celphone" type="text" placeholder="Celular" maxlength="10">
           </div>
 
-          <div class="form-group {{ $errors->has('txt_phone') ? ' has-error' : '' }}">
+          <div class="form-group">
             <label class="sr-only" for="txt_phone">Teléfono: </label>
-            <input class="form-control" id="txt_phone" name="txt_phone" type="text" placeholder="Teléfono">
+            <input class="form-control" id="txt_phone" name="txt_phone" type="text" placeholder="Teléfono" maxlength="10">
           </div>
 
-          <div class="form-group {{ $errors->has('txt_email') ? ' has-error' : '' }}">
+          <div class="form-group">
               <label class="sr-only" for="txt_email">Correo electrónico: </label>
-              <input class="form-control" id="txt_email" name="txt_email" type="text" placeholder="Correo electrónico" required>
+              <input class="form-control" id="txt_email" name="txt_email" type="text" placeholder="Correo electrónico" required maxlength="50">
           </div>
 
           <button class="btn btn-block btn-custom" type="submit" name="btn_save">Registrar</button>
@@ -109,7 +109,7 @@ $.validator.addMethod("valueNotEquals", function(value, element, arg){
 
 $( "#form" ).validate( {
   rules: {
-    txt_identificacion: {
+    txt_identification: {
       digits: true,
       required: false,
     },

@@ -17,6 +17,7 @@
 <script src="{{Asset('plugins/summernote/lang/summernote-es-ES.js')}}" charset="utf-8"></script>
 <script>
   $(document).ready(function() {
+
       $('#txt_observation').summernote({
         height: 90,
         placeholder: 'Observaciones',
@@ -54,67 +55,37 @@
               </select>
           </div>
 
-          <div class="form-group {{ $errors->has('txt_name') ? ' has-error' : '' }}">
+          <div class="form-group">
             <label class="sr-only" for="txt_name">Nombre: </label>
-            <input class="form-control" id="txt_name" name="txt_name" type="text" placeholder="Nombre" required>
-            @if ($errors->has('txt_name'))
-                <span class="help-block">
-                    <strong>{{ $errors->first('txt_name') }}</strong>
-                </span>
-            @endif
+            <input class="form-control" id="txt_name" name="txt_name" type="text" placeholder="Nombre" required maxlength="45">
           </div>
 
-          <div class="form-group {{ $errors->has('txt_celphone') ? ' has-error' : '' }}">
+          <div class="form-group">
               <label class="sr-only" for="txt_celphone">Celular: </label>
               <input class="form-control" id="txt_celphone" name="txt_celphone" type="text" placeholder="Celular" maxlength="10">
-              @if ($errors->has('txt_celphone'))
-                  <span class="help-block">
-                      <strong>{{ $errors->first('txt_celphone') }}</strong>
-                  </span>
-              @endif
           </div>
 
-          <div class="form-group {{ $errors->has('txt_phone') ? ' has-error' : '' }}">
+          <div class="form-group">
             <label class="sr-only" for="txt_phone">Teléfono: </label>
             <input class="form-control" id="txt_phone" name="txt_phone" type="text" placeholder="Teléfono" maxlength="10">
-            @if ($errors->has('txt_phone'))
-            <span class="help-block">
-              <strong>{{ $errors->first('txt_phone') }}</strong>
-            </span>
-            @endif
           </div>
 
-          <div class="form-group {{ $errors->has('txt_email') ? ' has-error' : '' }}">
+          <div class="form-group">
               <label class="sr-only" for="txt_email">Correo electrónico: </label>
               <input class="form-control" id="txt_email" name="txt_email" type="text" placeholder="Correo electrónico" maxlength="40" required>
-              @if ($errors->has('txt_email'))
-                  <span class="help-block">
-                      <strong>{{ $errors->first('txt_email') }}</strong>
-                  </span>
-              @endif
           </div>
 
-          <div class="form-group {{ $errors->has('txt_subject') ? ' has-error' : '' }}">
+          <div class="form-group">
               <label class="sr-only" for="txt_subject">Asunto: </label>
               <input class="form-control" id="txt_subject" name="txt_subject" type="text" placeholder="Asunto" required>
-              @if ($errors->has('txt_subject'))
-                  <span class="help-block">
-                      <strong>{{ $errors->first('txt_subject') }}</strong>
-                  </span>
-              @endif
           </div>
 
-          <div class="form-group {{ $errors->has('txt_observation') ? ' has-error' : '' }}">
-              <label class="sr-only" for="txt_observation">Asunto: </label>
+          <div class="form-group">
+              <label class="sr-only" for="txt_observation">Descripción: </label>
               <textarea name="txt_observation" id="txt_observation" required></textarea>
-              @if ($errors->has('txt_observation'))
-                  <span class="help-block">
-                      <strong>{{ $errors->first('txt_observation') }}</strong>
-                  </span>
-              @endif
           </div>
 
-          <button class="btn btn-block btn-custom" type="submit" name="btn_save">Registrar</button>
+          <button class="btn btn-block btn-custom" type="submit" name="btn_save" >Registrar</button>
 
         </form>
       </div>
@@ -166,8 +137,7 @@ $( "#form" ).validate( {
     },
     txt_observation: {
       required: true,
-    }
-
+    },
   }
 });
 </script>
@@ -181,6 +151,20 @@ $( "#form" ).validate( {
           'Tu incidente fue registrado ' +
           'exitosamente y entrará en ' +
           'estudio lo más rapido posible.',
+        showCloseButton: true,
+        confirmButtonText: '<i class="fa fa-times"></i> Cerrar',
+      }).catch(swal.noop)
+
+  </script>
+@endif
+
+@if(session('error'))
+  <script type="text/javascript">
+      swal({
+        title: 'Error',
+        type: 'error',
+        html:
+          'El campo de observaciones es el más importante por favor llenalo tambien.',
         showCloseButton: true,
         confirmButtonText: '<i class="fa fa-times"></i> Cerrar',
       }).catch(swal.noop)

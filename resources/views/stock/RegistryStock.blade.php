@@ -30,6 +30,21 @@
           <br>
           <br>
           <br>
+
+          @if(session('delivery'))
+            <script type="text/javascript">
+                swal({
+                  title: 'Registro Exitoso',
+                  type: 'success',
+                  html:
+                    'El registro en el inventario fue Exitoso',
+                  showCloseButton: true,
+                  confirmButtonText: '<i class="fa fa-times"></i> Cerrar',
+                }).catch(swal.noop)
+
+            </script>
+          @endif
+
           <div class="form-group">
               <label class="sr-only" for="opt_element">Elemento: </label>
               <select class="form-control" id="opt_element" name="opt_element" type="text"  required>

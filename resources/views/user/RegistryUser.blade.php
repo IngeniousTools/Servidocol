@@ -17,7 +17,7 @@
     <div class="form-position col-xs-12 col-md-6 col-md-offset-3">
 
       <div class="form-content">
-        <form role="form" action="" method="post">
+        <form role="form" action="" method="post" id="form">
           {{ csrf_field() }}
 
           @if(session('delivery'))
@@ -35,10 +35,25 @@
             </script>
           @endif
 
+          @if(session('error'))
+            <script type="text/javascript">
+                swal({
+                  title: 'Error.',
+                  type: 'error',
+                  html:
+                    'Usuario ya fue registrado anteriormente o no existe.',
+                  showCloseButton: true,
+                  showConfirmButton: true,
+                  confirmButtonText: '<i class="fa fa-times"></i> Cerrar',
+                }).catch(swal.noop)
+
+            </script>
+          @endif
+
           <h2 class="text-center">Registro de usuarios</h2>
           <div class="form-group">
               <label class="sr-only" for="txt_identificacion">Identificación.</label>
-              <input class="form-control" id="txt_identificacion" name="txt_identificacion" type="text" placeholder="Identificación" required>
+              <input class="form-control" id="txt_identificacion" name="txt_identificacion" type="text" placeholder="Identificación" required maxlength="10">
           </div>
 
           <div class="form-group">
@@ -53,7 +68,7 @@
 
           <div class="form-group">
               <label class="sr-only" for="txt_password">Contraseña: </label>
-              <input class="form-control" id="txt_password" name="txt_password" type="password" placeholder="Contraseña" required>
+              <input class="form-control" id="txt_password" name="txt_password" type="password" placeholder="Contraseña" required maxlength="16">
           </div>
 
           <button class="btn btn-block btn-custom" type="submit" name="btn_save">Registrar</button>
@@ -71,6 +86,8 @@ jQuery.extend(jQuery.validator.messages, {
   required: "Este campo es obligatorio.",
   email: "Por favor, escribe una dirección de correo válida",
   digits: "Por favor, escribe sólo dígitos.",
+  minlength: "Este campo debe tener entre 8 y 16 caracteres.",
+  maxlength: "Este campo debe tener entre 8 y 16 caracteres.",
   });
 });
 
@@ -89,10 +106,12 @@ $( "#form" ).validate( {
     },
     txt_identificacion: {
       digits: true,
-      required: false,
+      required: true,
     },
     txt_password: {
-      required: false,
+      minlength: 8,
+      maxlength: 16,
+      required: true,
     }
   }
 });

@@ -16,8 +16,7 @@ class Loan extends Migration
       Schema::create('Loan', function (Blueprint $table) {
         $table->integer('idRequirement')->unsigned();
         $table->integer('idStock')->unsigned();
-        $table->string('location',30)->nullable();
-        $table->date('autorizationDate');
+        $table->date('autorizationDate')->nullable();
 
         $table->foreign('idRequirement')->references('idRequirement')->on('Requirement');
         $table->foreign('idStock')->references('idStock')->on('Stock');

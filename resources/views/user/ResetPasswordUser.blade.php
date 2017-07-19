@@ -3,24 +3,18 @@
 @section('styles')
 <style media="screen">
   body{
-    background-image:url(../../images/bg-screen4.jpg);
+    background-image:url(../../images/bg-screen12.jpg);
     background-attachment: fixed;
     background-repeat: no-repeat;
     background-size: cover;
   }
 </style>
-<link rel="stylesheet" href="{{Asset('plugins/datepicker/css/bootstrap-datepicker3.min.css')}}">
-
-@endsection
-
-@section('scripts')
-  <script src="{{Asset('plugins/datepicker/js/bootstrap-datepicker.min.js')}}" type="Text/JavaScript"></script>
 @endsection
 
 @section('content')
 <div class="container">
   <div class="row">
-    <div class="form-position col-xs-8 col-md-8 col-md-offset-2">
+    <div class="form-position col-xs-12 col-md-6 col-md-offset-3">
 
       <div class="form-content">
         <form role="form" action="" method="post" id="form">
@@ -32,7 +26,7 @@
                   title: 'Exito.',
                   type: 'success',
                   html:
-                    'Solicitud en procesamiento',
+                    'Cambio de contraseña exitoso.',
                   showCloseButton: true,
                   showConfirmButton: true,
                   confirmButtonText: '<i class="fa fa-times"></i> Cerrar',
@@ -46,7 +40,7 @@
                   title: 'Error.',
                   type: 'error',
                   html:
-                    'El usuario no existe',
+                    'La contraseña antigua no es correcta.',
                   showCloseButton: true,
                   showConfirmButton: true,
                   confirmButtonText: '<i class="fa fa-times"></i> Cerrar',
@@ -55,52 +49,30 @@
             </script>
           @endif
 
-          <h2 class="text-center">Registro de solicitudes</h2>
-          <br>
-          <br>
+          <h2 class="text-center">Cambio de contraseña.</h2>
+
+          <div class="form-group">
+            <label class="sr-only" for="txt_passwordOld">Contraseña actual: </label>
+            <input class="form-control" id="txt_passwordOld" name="txt_passwordOld" type="password" placeholder="Contraseña actual" required maxlength="16">
+          </div>
           <br>
           <div class="form-group">
-            <label class="sr-only" for="txt_identity">Identificación: </label>
-            <input class="form-control" id="txt_identity" name="txt_identity" type="text" placeholder="Documento de identidad" required>
+            <label class="sr-only" for="txt_passwordNew">Contraseña nueva: </label>
+            <input class="form-control" id="txt_passwordNew" name="txt_passwordNew" type="password" placeholder="Contraseña nueva" required maxlength="16">
           </div>
-          <br>
-          @foreach($stocks as $stock)
-          <div class="row">
-            <div class="col-md-4 col-md-offset-2">
-              {{$stock->item}}
-            </div>
-            <div class="col-md-4">
-              <input type="number" name="nmb_{{$stock->idItem}}" id="nmb_{{$stock->idItem}}" value="0" min="0" max="{{$stock->quantity}}">
-            </div>
-          </div>
-
-          @endforeach
-          <br>
           <br>
           <div class="form-group">
-            <label class="sr-only" for="txt_deliveryDate">Fecha de entrega o notificación: </label>
-            <input class="form-control" id="txt_deliveryDate" name="txt_deliveryDate" type="text" placeholder="Fecha de entrega o notificación" required>
+            <label class="sr-only" for="txt_passwordRectify">Rectificar la nueva contraseña: </label>
+            <input class="form-control" id="txt_passwordRectify" name="txt_passwordRectify" type="password" placeholder="Rectificar la contraseña" required maxlength="16">
           </div>
-
-          <button class="btn btn-block btn-custom" type="submit" name="btn_save">Registrar</button>
+          <br>
+          <button class="btn btn-block btn-custom" type="submit" name="btn_save">Cambiar</button>
 
         </form>
       </div>
     </div>
   </div>
 </div>
-
-<script type="text/javascript">
-$('#txt_deliveryDate').datepicker({
-  endDate: "today",
-  format: "yyyy-mm-dd",
-  todayBtn: "linked",
-  language: "es",
-  orientation: "bottom right",
-  autoclose: true,
-  todayHighlight: true,
-});
-</script>
 
 <script>
 
@@ -109,6 +81,9 @@ jQuery.extend(jQuery.validator.messages, {
   required: "Este campo es obligatorio.",
   email: "Por favor, escribe una dirección de correo válida",
   digits: "Por favor, escribe sólo dígitos.",
+  minlength: "Este campo debe tener entre 8 y 16 caracteres.",
+  maxlength: "Este campo debe tener entre 8 y 16 caracteres.",
+  equalTo: "Las contraseñas no coinciden.",
   });
 });
 
@@ -122,20 +97,19 @@ $.validator.addMethod("valueNotEquals", function(value, element, arg){
 
 $( "#form" ).validate( {
   rules: {
-    opt_element: {
-      valueNotEquals: "0",
+    txt_passwordOld: {
+      minlength: 8,
+      maxlength: 16,
+      required: true,
     },
-    opt_brand: {
-      valueNotEquals: "0",
+    txt_passwordNew: {
+      minlength: 8,
+      maxlength: 16,
+      required: true,
     },
-    txt_price: {
-      digits: true,
-      required: false,
+    txt_passwordRectify: {
+      equalTo: "#txt_passwordNew"
     },
-    txt_quantity: {
-      digits: true,
-      required: false,
-    }
   }
 });
 </script>

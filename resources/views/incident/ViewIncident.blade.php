@@ -188,17 +188,25 @@
               <div class="form-group">
                 <label></label>
               </div>
+              <div class="row">
 
-              <div class="col-xs-6">
-                <a href="{{action('IncidentController@PropertyIncident',[$incident->idIncident])}}">
-                  <button class="btn btn-custom" type="button" name="button">Tomar propiedad</button>
-                </a>
-              </div>
+                <div class="col-xs-4">
+                  <a href="{{action('IncidentController@ChangeStatusIncident',[$incident->idIncident])}}">
+                    <button class="btn btn-danger" type="button" name="button">Cerrar caso</button>
+                  </a>
+                </div>
 
-              <div class="col-xs-6">
-                <a href="{{action('IncidentController@ChangeStatusIncident',[$incident->idIncident])}}">
-                  <button class="btn btn-danger" type="button" name="button">Cerrar caso</button>
-                </a>
+                <div class="col-xs-4">
+                  <a href="{{action('IncidentController@PropertyIncident',[$incident->idIncident])}}">
+                    <button class="btn btn-custom " type="button" name="button">Tomar propiedad</button>
+                  </a>
+                </div>
+
+                <div class="col-xs-4">
+                  <a href="{{action('IncidentController@ReturnIncident',[$incident->idIncident])}}">
+                    <button class="btn btn-danger " type="button" name="button">Rechazar caso</button>
+                  </a>
+                </div>
               </div>
             @endif
 

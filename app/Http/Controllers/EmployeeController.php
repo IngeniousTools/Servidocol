@@ -26,7 +26,7 @@ class EmployeeController extends Controller{
 
     protected function RegistryEmployee(Request $request){
       $employee = new Employee;
-      $employee->idEmployee=$request->input('txt_identificacion');
+      $employee->idEmployee=$request->input('txt_identification');
       $employee->idJobTitle=$request->input('opt_jobtitle');
       $employee->name=$request->input('txt_name');
       $employee->lastName=$request->input('txt_lastname');
@@ -72,12 +72,18 @@ class EmployeeController extends Controller{
 
     protected function RegistryUser(Request $request){
       $user = new User;
-      $user->idUser = null;
-      $user->idEmployee = $request->input('txt_identificacion');
-      $user->idRol = $request->input('opt_rol');
-      $user->password = encrypt($request->input('txt_password'));
-      $user->status = 1;
-      $user->save();
+      if (User::where('idEmployee',$request->input('txt_identificacion'))->first()) {
+        return back()->with('error','error');
+      }elseif (empty(Employee::where('idEmployee',$request->input('txt_identificacion'))->first())){
+        return back()->with('error','error');
+      }else {
+        $user->idUser = null;
+        $user->idEmployee = $request->input('txt_identificacion');
+        $user->idRol = $request->input('opt_rol');
+        $user->password = encrypt($request->input('txt_password'));
+        $user->status = 1;
+        $user->save();
+      }
 
       return back()->with('delivery','delivery');
     }
@@ -132,6 +138,40 @@ class EmployeeController extends Controller{
       }
       return redirect('/');
 
+    }
+
+    protected function ResetPasswordUser(Request $request){
+      $user = DB::table('user')
+                     ->where('idEmployee', '=', session('identification'))
+                     ->get();
+
+       foreach ($user as $users) {
+         if($request->input('txt_passwordOld') === decrypt($users->password)){
+           $userChange = User::find($users->idUser);
+           $userChange->password = encrypt($request->input('txt_passwordNew'));
+           $userChange->save();
+           return back()->with('delivery','Cambio de contraseña');
+         }else{
+           return back()->with('error','Cambio de contraseña');
+         }
+       }
+     }
+
+    protected function ResetPasswordOtherUser(Request $request){
+     $user = DB::table('user')
+                    ->where('idEmployee', '=', $request->input('txt_identification'))
+                    ->get();
+
+      if($user<>"[]"){
+        foreach ($user as $users) {
+          $userChange = User::find($users->idUser);
+          $userChange->password = encrypt($request->input('txt_passwordNew'));
+          $userChange->save();
+          return back()->with('delivery','Cambio de contraseña');
+        }
+      }else{
+        return back()->with('error','Cambio de contraseña');
+      }
     }
 
     protected function Logout(Request $request){

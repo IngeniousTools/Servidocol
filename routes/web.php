@@ -50,25 +50,6 @@ Route::group(['middleware' => ['OperationsManager']], function () {
 
   });
 
-  Route::group(['prefix' => 'user'], function (){
-
-    Route::get('create',function () {
-      $rol = DB::table('rol')->where('status',1)->get();
-      $data = array('rol' => $rol,
-                    'title' => 'Crear usuario',);
-      return view('user.RegistryUser', $data);
-    });
-
-    Route::post('create','EmployeeController@RegistryUser');
-
-    Route::get('list','EmployeeController@ListUser');
-
-    Route::get('view/{identification}','EmployeeController@ViewUser');
-
-    Route::post('update/{identification}','EmployeeController@UpdateUser');
-
-  });
-
   Route::group(['prefix' => 'element'], function (){
 
     Route::group(['prefix' => 'category'], function (){
@@ -174,6 +155,42 @@ Route::group(['middleware' => ['OperationsManager']], function () {
 
 });
 
+Route::group(['prefix' => 'user'], function (){
+
+  Route::get('create',function () {
+    $rol = DB::table('rol')->where('status',1)->get();
+    $data = array('rol' => $rol,
+                  'title' => 'Crear usuario',);
+    return view('user.RegistryUser', $data);
+  })->middleware('OperationsManager');
+
+  Route::post('create','EmployeeController@RegistryUser')->middleware('OperationsManager');
+
+  Route::get('list','EmployeeController@ListUser')->middleware('OperationsManager');
+
+  Route::get('view/{identification}','EmployeeController@ViewUser')->middleware('OperationsManager');
+
+  Route::post('update/{identification}','EmployeeController@UpdateUser')->middleware('OperationsManager');
+
+  Route::get('restore',function(){
+      $data = array('title' => 'Restablecimiento de contraseñas',
+                    );
+    return view('user.ResetPasswordUser',$data);
+  })->middleware('IsLogged');
+
+  Route::post('restore','EmployeeController@ResetPasswordUser')->middleware('IsLogged');
+
+  Route::get('restoreuserpassword',function(){
+      $data = array('title' => 'Restablecimiento de contraseñas a otros usuarios',
+                    );
+    return view('user.ResetPasswordOtherUser',$data);
+  })->middleware('OperationsManager');
+
+  Route::post('restoreuserpassword','EmployeeController@ResetPasswordOtherUser')->middleware('OperationsManager');
+
+});
+
+
 Route::group(['prefix' => 'incident'], function (){
 
   Route::get('create',function () {
@@ -194,6 +211,8 @@ Route::group(['prefix' => 'incident'], function (){
   Route::post('view/{identification}','IncidentController@CommentIncident')->middleware('IncidentList');
 
   Route::get('property/{identification}','IncidentController@PropertyIncident')->middleware('IncidentList');
+
+  Route::get('return/{identification}','IncidentController@ReturnIncident')->middleware('IncidentList');
 
   Route::get('close/{identification}','IncidentController@ChangeStatusIncident')->middleware('IncidentList');
 
@@ -226,5 +245,29 @@ Route::group(['prefix' => 'incident'], function (){
   })->middleware('IncidentList');
 
   Route::post('filter/{identification}','IncidentController@FilterIncident')->middleware('IncidentList');
+
+});
+
+Route::group(['prefix' => 'request'], function (){
+
+  Route::get('create', function (){
+    $stocks = DB::table('bill')
+            ->select(DB::raw('item.name as item, item.idItem as idItem, brand.name as brand, (SUM(quantity)) as quantity'))
+            ->join('brand','bill.idBrand','=','brand.idBrand')
+            ->join('item','bill.idItem','=','item.idItem')
+            ->join('stock','bill.idBill','=','stock.idBill')
+            ->whereRaw('item.idItem=bill.idItem')
+            ->whereRaw('brand.idBrand=bill.idBrand')
+            ->where([['brand.status','1'],['item.status','1'],['stock.status','1']])
+            ->groupBy('brand')
+            ->groupBy('idItem')
+            ->groupBy('item')->get();
+    $data = array('title' => 'Solicitud de elemento',
+                  'stocks' => $stocks,
+                  );
+    return view('request.RegistryRequest',$data);
+  });
+
+  Route::post('create', 'RequestController@RequestElement');
 
 });

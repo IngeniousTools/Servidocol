@@ -18,6 +18,7 @@ class Item extends Migration
         $table->integer('idCategory')->unsigned();
         $table->tinyInteger('idDeposit');
         $table->string('name',20);
+        $table->string('Category',1);
         $table->boolean('status');
 
         $table->foreign('idCategory')->references('idCategory')->on('Category');
