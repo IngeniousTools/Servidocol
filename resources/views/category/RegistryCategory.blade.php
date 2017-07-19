@@ -26,7 +26,7 @@
                   title: 'Exito.',
                   type: 'success',
                   html:
-                    'Categoria registrada exitosamente.',
+                    'Area de uso registrada exitosamente.',
                   showCloseButton: true,
                   showConfirmButton: true,
                   confirmButtonText: '<i class="fa fa-times"></i> Cerrar',
@@ -35,7 +35,7 @@
             </script>
           @endif
 
-          <h2 class="text-center">Registro de categorias</h2>
+          <h2 class="text-center">Registro de area de usos</h2>
 
           <div class="form-group">
             <label class="sr-only" for="txt_name">Nombre: </label>

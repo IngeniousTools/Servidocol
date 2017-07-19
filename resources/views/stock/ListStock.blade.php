@@ -22,7 +22,6 @@
             <th>Valor total</th>
             <th>Valor unitario</th>
             <th>Categoria</th>
-            <th>Opciones</th>
           </tr>
         </thead>
         <tbody>
@@ -34,11 +33,6 @@
               <td class="text-right">{{'$' . number_format($bill->price)}}</td>
               <td class="text-right">{{'$' . number_format($bill->price/$bill->quantity)}}</td>
               <td>{{$bill->clasification}}</td>
-              <td>
-                <a href="#">
-                  <i class="fa fa-pencil-square-o fa-fw" aria-hidden="true"></i>&nbsp; Actualizar
-                </a>
-              </td>
             </tr>
           @endforeach
         </tbody>

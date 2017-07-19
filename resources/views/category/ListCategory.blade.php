@@ -11,7 +11,7 @@
 @section('content')
 <div class="container form-position">
   <div class="row">
-    <h2 class="text-center">Lista de categorias</h2>
+    <h2 class="text-center">Lista de area de uso</h2>
     <div class="col-xs-12 col-md-10 col-md-offset-1">
       <table id="table_id" class="table table-striped table-bordered dataTable">
         <thead>

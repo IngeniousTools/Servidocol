@@ -55,16 +55,16 @@
                   <a href="#" data-toggle="dropdown"> <button class="btn btn-navbar-custom" type="button">Elementos  <i class="fa fa-sort-desc" aria-hidden="true"></i></button></a>
                   <ul class="dropdown-menu">
                     <li class="dropdown-submenu">
-                      <a class="btn btn-navbar-custom text-left" href="#">Categoria<i class="fa fa-sort-desc" aria-hidden="true"></i></a>
+                      <a class="btn btn-navbar-custom text-left" href="#">Area de uso<i class="fa fa-sort-desc" aria-hidden="true"></i></a>
                       <ul class="dropdown-menu" style="background-color:#4B85E8;">
                         <li>
                           <a href="{{url('element/category/create')}}">
-                            <button type="submit" class="btn btn-navbar-custom">Crear categorias</button>
+                            <button type="submit" class="btn btn-navbar-custom">Crear area de uso</button>
                           </a>
                         </li>
                         <li>
                           <a href="{{url('element/category/list')}}">
-                            <button type="submit" class="btn btn-navbar-custom">Ver categorias</button>
+                            <button type="submit" class="btn btn-navbar-custom">Ver area de uso</button>
                           </a>
                         </li>
                       </ul>

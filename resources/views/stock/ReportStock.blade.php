@@ -37,27 +37,17 @@
 
           <div class="col-xs-6">
             <br>
-            <div class="form-group {{ $errors->has('txt_initialDate') ? ' has-error' : '' }}">
+            <div class="form-group">
               <label class="sr-only" for="txt_initialDate">Fecha inicial: </label>
               <input class="form-control" id="txt_initialDate" name="txt_initialDate" type="text" placeholder="Fecha inicial" required>
-              @if ($errors->has('txt_initialDate'))
-                  <span class="help-block">
-                      <strong>{{ $errors->first('txt_initialDate') }}</strong>
-                  </span>
-              @endif
             </div>
           </div>
 
           <div class="col-xs-6">
             <br>
-            <div class="form-group {{ $errors->has('txt_finishDate') ? ' has-error' : '' }}">
+            <div class="form-group">
               <label class="sr-only" for="txt_finishDate">Fecha Final: </label>
               <input class="form-control" id="txt_finishDate" name="txt_finishDate" type="text" placeholder="Fecha Final" required>
-              @if ($errors->has('txt_finishDate'))
-              <span class="help-block">
-                <strong>{{ $errors->first('txt_finishDate') }}</strong>
-              </span>
-              @endif
             </div>
           </div>
 
@@ -107,4 +97,36 @@ $('#txt_initialDate').datepicker({
 });
 </script>
 
+<script>
+
+$(document).ready(function() {
+jQuery.extend(jQuery.validator.messages, {
+  required: "Este campo es obligatorio.",
+  email: "Por favor, escribe una dirección de correo válida",
+  digits: "Por favor, escribe sólo dígitos.",
+  date: "Por favor, escribe una fecha válida.",
+  });
+});
+
+jQuery.validator.addMethod("lettersonly", function(value, element){
+return this.optional(element) || /^[a-z ]+$/i.test(value);
+}, "Letras solamente por favor.");
+
+$.validator.addMethod("valueNotEquals", function(value, element, arg){
+ return arg !== value;
+}, "Selecciona otra opción.");
+
+$( "#form" ).validate( {
+  rules: {
+    txt_initialDate: {
+      date: true,
+      required: true,
+    },
+    txt_finishDate: {
+      date: true,
+      required: true,
+    },
+  }
+});
+</script>
 @endsection

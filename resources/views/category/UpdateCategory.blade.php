@@ -45,7 +45,7 @@
         <form role="form" action="{{action('CategoryController@UpdateCategory',[$category->idCategory])}}" method="post" id="form">
           {{ csrf_field() }}
 
-          <h2 class="text-center">Actualización de categoria</h2>
+          <h2 class="text-center">Actualización de area de uso</h2>
           <br>
           <br>
           <br>

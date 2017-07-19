@@ -23,7 +23,7 @@
     <div class="form-position col-xs-12 col-md-6 col-md-offset-3">
 
       <div class="form-content">
-        <form role="form" action="" method="post">
+        <form role="form" action="" method="post" id="form">
           {{ csrf_field() }}
 
           <h2 class="text-center">Registro de elementos en el inventario</h2>
@@ -107,6 +107,7 @@ jQuery.extend(jQuery.validator.messages, {
   required: "Este campo es obligatorio.",
   email: "Por favor, escribe una dirección de correo válida",
   digits: "Por favor, escribe sólo dígitos.",
+  date: "Por favor, escribe una fecha válida.",
   });
 });
 
@@ -128,11 +129,15 @@ $( "#form" ).validate( {
     },
     txt_price: {
       digits: true,
-      required: false,
+      required: true,
     },
     txt_quantity: {
       digits: true,
-      required: false,
+      required: true,
+    },
+    txt_date: {
+      date: true,
+      required: true,
     }
   }
 });
